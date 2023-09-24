@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     {
         //get movement vector from input
         Vector2 movementVector = ctx.ReadValue<Vector2>();
+        Debug.Log(ctx.phase);
 
         //invoke event broadcasting updated input value
         if (ctx.phase == InputActionPhase.Performed) { m_OnPlayerMoveStart?.Invoke(movementVector); }
