@@ -35,7 +35,7 @@ public class PlayerMovementBehaviour : MonoBehaviour
     private Vector3 _targetMoveVector;
     private Vector3 _moveVector;
     private float movementSpeed;
-
+    private bool bEnableMovement;
     #endregion
 
     #region Components
@@ -46,9 +46,11 @@ public class PlayerMovementBehaviour : MonoBehaviour
     void Start()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        SetMovementEnabled(true);
     }
     void Update()
     {
+        if(!bEnableMovement) { return; } // we disable movemnt for various actions such as attacking and dashing
         AcceleratePlayer();
         MovePlayer();
         RotatePlayer();
@@ -57,6 +59,12 @@ public class PlayerMovementBehaviour : MonoBehaviour
     #endregion
 
     #region Methods
+
+    public void SetMovementEnabled(bool enabled)
+    {
+        bEnableMovement = enabled;
+    }
+
     public void GetMovementInput(Vector2 input)
     {
         _movementInput = new Vector3(input.x, 0.0f, input.y);
