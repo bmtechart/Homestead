@@ -2,18 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ResourceDepositController : MonoBehaviour, IDamageable
+public class PlayerAnimationEventDispatcher : MonoBehaviour
 {
     // Start is called before the first frame update
-
-    [SerializeField]
-    private float health = 1.0f;
-
-    public void Damage(float damageAmount)
-    {
-        Debug.Log("Damaged this resource node!");
-    }
-
     void Start()
     {
         
@@ -23,5 +14,10 @@ public class ResourceDepositController : MonoBehaviour, IDamageable
     void Update()
     {
         
+    }
+
+    public void AttackHit()
+    {
+        Debug.Log("asdfasdf");
     }
 }

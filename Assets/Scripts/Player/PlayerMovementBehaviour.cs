@@ -59,7 +59,6 @@ public class PlayerMovementBehaviour : MonoBehaviour
     #region Methods
     public void GetMovementInput(Vector2 input)
     {
-        Debug.Log(input);
         _movementInput = new Vector3(input.x, 0.0f, input.y);
     }
 
