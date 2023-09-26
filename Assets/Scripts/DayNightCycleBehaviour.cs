@@ -1,68 +1,60 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class DayNightCycleBehaviour : MonoBehaviour
 {
-    public float dayTimer;
-    public float nightTimer;
+    public float dayDuration;
+    public float nightDuration;
 
-    /*private int _timer;
+    private float timeOfDay = 0.0f;
+    private bool isDaytime = true;
 
-    private IEnumerator _timerCoroutine;
-
-    public Action OnTimeOut;
+    public Action OnDayStart;
+    public Action OnNightStart;
 
     // Start is called before the first frame update
     void Start()
     {
-        StartTimer(10, TimeOut);
+        StartDayNightCycle();
     }
 
-    private void TimeOut()
-    {
-        Debug.Log("Your timer is up.");
-    }
-
-    public void StartTimer(int timer, Action onTimeOut)
-    {
-        OnTimeOut = onTimeOut;
-        _timer = 0;
-        _timerCoroutine = StartTimer(timer);
-        StartCoroutine(_timerCoroutine);
-    }
-
-    private IEnumerator StatTimer(int totalTime)
-    {
-        while (_timer < totalTime)
-        {
-            yield return new WaitForSecondsRealTime(1);
-            _timer++;
-            Debug.Log("Timer is :" + _timer);
-        }
-
-        OnTimeOut?.Invoke();
-    }
-
-    public void StopTimer()
-    {
-        if(_timerCoroutine != null)
-        {
-            StopCoroutine(_timerCoroutine);
-            _timerCoroutine = null;
-            OnTimeOut =
-        }
-    }
-    */
     // Update is called once per frame
     void Update()
     {
-        // I want to transition from night and day.
+        timeOfDay += Time.deltaTime;
 
-        //I want it to track which part is night and which part is day 
+        if(isDaytime && timeOfDay >= dayDuration)
+        {
+            SwitchToNight();
+            Debug.Log("It's night");
+        }
+        else if(!isDaytime && timeOfDay >= nightDuration)
+        {
+            SwitchToDay();
+            Debug.Log("It's day");
+        }
+    }
 
-        // during the day I want there will not be any enemy to attack the base.
+    private void StartDayNightCycle()
+    {
+        timeOfDay = 0.0f;
+        isDaytime = true;
+        OnDayStart?.Invoke();
+    }
 
-        //The night should spawn enemies to try to attack the house.
+    private void SwitchToNight()
+    {
+        timeOfDay = 0.0f;
+        isDaytime = false;
+        OnNightStart?.Invoke();
+    }
+
+    private void SwitchToDay()
+    {
+        timeOfDay = 0.0f;
+        isDaytime = true;
+        OnDayStart?.Invoke();
     }
 }
