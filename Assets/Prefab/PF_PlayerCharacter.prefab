@@ -232,7 +232,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 6
   accelerationRate: 2
-  decelerationRate: 7
+  decelerationRate: 20
   speedMultiplier: 0
   turnSpeed: 0.1
 --- !u!136 &7049937257564777823
@@ -245,7 +245,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.4
+  m_Radius: 0.52
   m_Height: 1.4
   m_Direction: 1
   m_Center: {x: 0, y: 0.7, z: 0}
