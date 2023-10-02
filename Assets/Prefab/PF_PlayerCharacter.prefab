@@ -119,9 +119,33 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 83a6ddcb-e79f-4b43-9d7b-7e5acfc93f79
     m_ActionName: UI/New action
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: eaa8734b-c98f-4daf-8c81-9218f5e60c57
+    m_ActionName: Day/Build[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2865766509715180372}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnMove
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: fd580be9-7034-4001-be12-cccae32b8c06
+    m_ActionName: Day/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 13f8c543-1e07-4093-8d24-6f6c7045926e
+    m_ActionName: Day/SwapBuilding
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
+  m_DefaultActionMap: Night
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &2865766509715180372
@@ -220,6 +244,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  m_OnPlayerBuildStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7963508368614502906}
+        m_TargetAssemblyTypeName: PlayerBuildBehaviour, Assembly-CSharp
+        m_MethodName: StartBuildingPlacement
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &9179835247599884852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -288,7 +327,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19557db2445bb6b48ace6786ed5a1242, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _buildingPrefab: {fileID: 0}
+  ConstructionPrefab: {fileID: 5012653362181896773, guid: 7997126b95c2db646a65d9808d4aa66a,
+    type: 3}
 --- !u!114 &8364278033463638975
 MonoBehaviour:
   m_ObjectHideFlags: 0

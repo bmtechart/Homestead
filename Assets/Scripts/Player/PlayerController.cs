@@ -23,6 +23,8 @@ public class PlayerController : MonoBehaviour, IDamageable
     #endregion
 
     #region Events
+
+    
     [Header("Event Dispatchers")]
     [Header("Movement")]
     public UnityEvent<Vector2> m_OnPlayerMoveStart;
@@ -32,6 +34,9 @@ public class PlayerController : MonoBehaviour, IDamageable
     [Header("Attacking")]
     public UnityEvent m_OnPlayerAttackStart;
     public UnityEvent m_OnPlayerAttackCancel;
+
+    [Header("Building")]
+    public UnityEvent m_OnPlayerBuildStart;
     #endregion
 
     #region Runtime Callbacks
@@ -39,11 +44,12 @@ public class PlayerController : MonoBehaviour, IDamageable
     void Start()
     {
         playerInput = GetComponent<PlayerInput>();
+        SetInputContext("Day");
     }
 
     #endregion
 
-    #region
+    #region Input Callbacks
     public void OnMove(InputAction.CallbackContext ctx)
     {
         //get movement vector from input
@@ -59,11 +65,25 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     }
 
+    public void OnEnterBuildMode(InputAction.CallbackContext ctx)
+    {
+        if(ctx.phase == InputActionPhase.Started) { }
+    }
+
     public void OnUseEquipment(InputAction.CallbackContext ctx) 
     {
         if(ctx.phase == InputActionPhase.Started) { m_OnPlayerAttackStart?.Invoke(); }
         if(ctx.phase == InputActionPhase.Canceled) { m_OnPlayerAttackCancel?.Invoke(); }
     }
+    #endregion
+
+    #region
+
+    public void SetInputContext(string mapName)
+    {
+        playerInput.SwitchCurrentActionMap(mapName);
+    }
+
     #endregion
 
     #region Damage Interface
