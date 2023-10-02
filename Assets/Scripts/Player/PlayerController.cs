@@ -60,11 +60,6 @@ public class PlayerController : MonoBehaviour, IDamageable
         if (ctx.phase == InputActionPhase.Canceled) { m_OnPlayerMoveCancel?.Invoke(movementVector); }
     }
 
-    public void OnDash(InputAction.CallbackContext ctx)
-    {
-
-    }
-
     public void OnEnterBuildMode(InputAction.CallbackContext ctx)
     {
         if(ctx.phase == InputActionPhase.Started) { }
