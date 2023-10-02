@@ -4,38 +4,13 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
+    private LevelData LevelDataObject;
 
-    private PlayerController playerController;
-    private CursorController cursorController;
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
-    }
+        //get data objects
+        LevelDataObject = DataManager.Instance.LevelDataObject;
 
-    public CursorController GetCursorController()
-    {
-        if(!cursorController)
-        {
-            cursorController = FindObjectOfType<CursorController>();
-        }
-
-        return cursorController;
-    }
-
-    public PlayerController GetPlayerController()
-    {
-        if(!playerController) 
-        {
-            playerController = FindObjectOfType<PlayerController>();
-        }
-
-        return playerController;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Cursor.visible = false; //TEMPORARY
     }
 }
