@@ -38,9 +38,14 @@ public class ResourceInventory : Singleton<ResourceInventory>
                 returnValue = metal; 
                 break;
             case ResourceTypes.Crystal: 
-                returnValue = crystal; 
-                 break;   
+                returnValue = crystal;
+                break;
+            default:
+                returnValue = -1;
+                break;
         }
+
+        return returnValue;
     }
 
     //add or subtract from our resource inventory
