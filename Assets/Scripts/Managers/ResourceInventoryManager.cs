@@ -3,24 +3,47 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class ResourceInventory : Singleton<ResourceInventory>
+public class ResourceInventoryManager : Singleton<ResourceInventoryManager>
 {
+    #region params
+    [Tooltip("Amount of wood at the start of the game")]
+    [SerializeField] private int startingWood = 100;
     private int wood;
+
+    [Tooltip("Amount of stone at the start of the game")]
+    [SerializeField] private int startingStone = 0;
     private int stone;
+
+    [Tooltip("Amount of metal at the start of the game")]
+    [SerializeField] private int startingMetal = 0;
     private int metal;
+
+    [Tooltip("Amount of crystal at the start of the game")]
+    [SerializeField] private int startingCrystal = 0;
     private int crystal;
+    #endregion
 
+    #region events
     public UnityEvent ResourceInventoryUpdated;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    #endregion
 
-    // Update is called once per frame
-    void Update()
+    #region Runtime Callbacks
+    public override void Awake()
     {
-        
+        base.Awake();
+        //initialize resource count
+        InitializeResourceCounts();
+    }
+    #endregion
+
+    #region methods
+
+    private void InitializeResourceCounts()
+    {
+        wood = startingWood;
+        stone = startingStone;
+        metal = startingMetal;
+        crystal = startingCrystal;
     }
 
     public int GetResourceCount(ResourceTypes resourceType) 
@@ -72,5 +95,5 @@ public class ResourceInventory : Singleton<ResourceInventory>
         ResourceInventoryUpdated?.Invoke();
     }
 
-
+    #endregion
 }

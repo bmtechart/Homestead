@@ -16,7 +16,7 @@ using UnityEngine.InputSystem;
 /// </summary>
 
 [RequireComponent(typeof(PlayerInput))]
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDamageable
 {
     #region Components
     private PlayerInput playerInput;
@@ -33,19 +33,17 @@ public class PlayerController : MonoBehaviour
     public UnityEvent m_OnPlayerAttackStart;
     public UnityEvent m_OnPlayerAttackCancel;
     #endregion
+
+    #region Runtime Callbacks
     // Start is called before the first frame update
     void Start()
     {
         playerInput = GetComponent<PlayerInput>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    #endregion
 
-
+    #region
     public void OnMove(InputAction.CallbackContext ctx)
     {
         //get movement vector from input
@@ -66,6 +64,12 @@ public class PlayerController : MonoBehaviour
         if(ctx.phase == InputActionPhase.Started) { m_OnPlayerAttackStart?.Invoke(); }
         if(ctx.phase == InputActionPhase.Canceled) { m_OnPlayerAttackCancel?.Invoke(); }
     }
+    #endregion
 
-    
+    #region Damage Interface
+    public void Damage(float damageAmount)
+    {
+        throw new System.NotImplementedException();
+    }
+    #endregion
 }

@@ -304,8 +304,11 @@ MonoBehaviour:
   OnDeath:
     m_PersistentCalls:
       m_Calls: []
+  OnHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
   maxHealth: 100
-  initialHealth: 100
+  initialHealth: 50
 --- !u!1001 &570890965837535215
 PrefabInstance:
   m_ObjectHideFlags: 0

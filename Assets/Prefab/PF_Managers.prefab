@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5230285923927519241}
   - component: {fileID: 4408290534725701577}
+  - component: {fileID: 8580329172099661928}
   m_Layer: 0
   m_Name: PF_Managers
   m_TagString: Untagged
@@ -44,7 +45,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 748e5647c71e4db4ab10750848451e3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wood: 0
-  stone: 0
-  metal: 0
-  crystal: 0
+  startingWood: 100
+  startingStone: 0
+  startingMetal: 0
+  startingCrystal: 0
+  ResourceInventoryUpdated:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &8580329172099661928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 870814020548183300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54fa26d72d75aa8468045fa4c0e24d84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

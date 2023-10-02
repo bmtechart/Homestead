@@ -2,16 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// base class that all AI in the game will inherit from
-/// this includes towers and enemies
-/// </summary>
-public class AIController : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
     // Start is called before the first frame update
     void Start()
     {
         
+    }
+
+    public PlayerController GetPlayerController()
+    {
+        return FindObjectOfType<PlayerController>();
     }
 
     // Update is called once per frame

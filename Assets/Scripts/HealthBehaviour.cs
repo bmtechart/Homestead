@@ -9,6 +9,9 @@ public class HealthBehaviour : MonoBehaviour
     //events
     public UnityEvent OnDeath;
 
+    [Tooltip("Callback parameters, current health")]
+    public UnityEvent<float, float, float> OnHealthChanged;
+
     [Tooltip("Absolute value represnting total hit point pool.")]
     [SerializeField] private float maxHealth = 100.0f;
 
@@ -32,10 +35,20 @@ public class HealthBehaviour : MonoBehaviour
             _currentHealth = value;
             _healthPercentage = _currentHealth / maxHealth;
 
+
+
             if (_currentHealth < 0.0f)
             {
                 OnDeath?.Invoke();
             }
+
+
+
         }
+    }
+
+    private void Awake()
+    {
+        CurrentHealth = initialHealth;
     }
 }

@@ -9,25 +9,23 @@ public class ResourceGeneratorController : BuildingController
     [Tooltip("The quantity of resources created every time the Genearte() method is called on this controller.")]
     [SerializeField] private int amountGenerated;
 
-    [SerializeField] private Dictionary<ResourceTypes, int> constructionCost;
 
     // Start is called before the first frame update
-    void Start()
+    override public void Start()
     {
+        base.Start();
         Generate();
     }
 
     // Update is called once per frame
-    void Update()
+    override public void Update()
     {
-        
+        base.Update();
     }
-
-
 
     public void Generate()
     {
-        ResourceInventory.GetInstance().ModifyResource(resourceType, amountGenerated);
+        ResourceInventoryManager.GetInstance().ModifyResource(resourceType, amountGenerated);
         Debug.Log(amountGenerated.ToString() + " " + resourceType.ToString() + " generated!");
     }
 }
