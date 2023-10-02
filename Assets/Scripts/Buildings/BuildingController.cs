@@ -8,6 +8,8 @@ public class BuildingController : MonoBehaviour
     [SerializeField]
     private ConstructionCost[] constructionCosts;
 
+    [SerializeField]
+    private bool previewMode;
     private bool canBePlaced;
     // Start is called before the first frame update
     public virtual void Start()
@@ -37,6 +39,7 @@ public class BuildingController : MonoBehaviour
             return;
         }
 
+        //instantiate building at location
         //stop building from following mouse cursor
         //enable collision
         //

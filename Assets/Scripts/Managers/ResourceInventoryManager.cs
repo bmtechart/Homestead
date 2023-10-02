@@ -7,16 +7,8 @@ public class ResourceInventoryManager : Singleton<ResourceInventoryManager>
 {
     #region params
     [Tooltip("Amount of wood at the start of the game")]
-    [SerializeField] private int startingWood = 100;
-    private int wood;
-
-    [Tooltip("Amount of stone at the start of the game")]
-    [SerializeField] private int startingStone = 0;
-    private int stone;
-
-    [Tooltip("Amount of metal at the start of the game")]
-    [SerializeField] private int startingMetal = 0;
-    private int metal;
+    [SerializeField] private int startingCurrency = 100;
+    private int currency;
 
     [Tooltip("Amount of crystal at the start of the game")]
     [SerializeField] private int startingCrystal = 0;
@@ -40,9 +32,8 @@ public class ResourceInventoryManager : Singleton<ResourceInventoryManager>
 
     private void InitializeResourceCounts()
     {
-        wood = startingWood;
-        stone = startingStone;
-        metal = startingMetal;
+        currency = startingCurrency;
+
         crystal = startingCrystal;
     }
 
@@ -51,17 +42,11 @@ public class ResourceInventoryManager : Singleton<ResourceInventoryManager>
         int returnValue;
         switch (resourceType)
         {
-            case ResourceTypes.Wood:
-                returnValue = wood;
-                break;
-            case ResourceTypes.Stone: 
-                returnValue = stone; 
-                break;
-            case ResourceTypes.Metal: 
-                returnValue = metal; 
+            case ResourceTypes.Currency:
+                returnValue = currency;
                 break;
             case ResourceTypes.Crystal: 
-                returnValue = crystal;
+                returnValue = crystal; 
                 break;
             default:
                 returnValue = -1;
@@ -76,18 +61,12 @@ public class ResourceInventoryManager : Singleton<ResourceInventoryManager>
     {
         switch (resourceType)
         {
-            case ResourceTypes.Wood: 
-                wood += amount; 
+            case ResourceTypes.Currency: 
+                currency += amount; 
                 break;
-            case ResourceTypes.Stone: 
-                stone += amount; 
-                break;
-            case ResourceTypes.Metal: 
-                metal += amount; 
-                break;
-            case ResourceTypes.Crystal : 
+            case ResourceTypes.Crystal: 
                 crystal += amount; 
-                break;   
+                break;
             default: 
                 break;
         }

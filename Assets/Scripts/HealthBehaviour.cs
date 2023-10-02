@@ -35,15 +35,10 @@ public class HealthBehaviour : MonoBehaviour
             _currentHealth = value;
             _healthPercentage = _currentHealth / maxHealth;
 
-
-
             if (_currentHealth < 0.0f)
             {
                 OnDeath?.Invoke();
             }
-
-
-
         }
     }
 
