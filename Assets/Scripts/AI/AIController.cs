@@ -8,6 +8,7 @@ using UnityEngine;
 /// </summary>
 public class AIController : MonoBehaviour
 {
+    #region Variables
     public PlayerController player;
     public Transform playerTransform;
     public Transform[] towerTransform;
@@ -23,6 +24,7 @@ public class AIController : MonoBehaviour
     private Transform currentTarget;
     
     [SerializeField]public bool targetTowers = true; //This bool controls Whether the enemy attacks a tower or the base.
+    #endregion
 
     // Start is called before the first frame update
     void Start()
@@ -54,6 +56,7 @@ public class AIController : MonoBehaviour
         }
     }
 
+    #region Main Behavior
     private void StopMoving()
     {
         //The function doesn't do anything, but just stops it's movement.
@@ -123,4 +126,5 @@ public class AIController : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(new Vector3(distanceToTarget.x, 0f, distanceToTarget.z));
         transform.Translate(Vector3.forward * movementSpeed * Time.deltaTime);
     }
+    #endregion
 }
