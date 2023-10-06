@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAnimationController : MonoBehaviour
+public class AIAnimationController : MonoBehaviour
 {
     public GameObject skeletalMesh;
 
-
     private Animator _animator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,25 +18,25 @@ public class PlayerAnimationController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void StartMoving()
     {
         if (!_animator) { return; }
-        _animator.SetTrigger("startMoving");
+        _animator.SetTrigger("WalkStart");
     }
 
     public void StopMoving()
     {
         if (!_animator) { return; }
-        _animator.ResetTrigger("startMoving");
-        _animator.SetTrigger("stopMoving");
+        _animator.ResetTrigger("WalkStart");
+        _animator.SetTrigger("WalkStop");
     }
 
     public void StartAttack()
     {
-        if(!_animator) { return; }
+        if (!_animator) { return; }
         _animator.SetTrigger("AttackStart");
     }
 

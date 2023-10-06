@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 /// <summary>
 /// base class that all AI in the game will inherit from
@@ -20,10 +21,18 @@ public class AIController : MonoBehaviour
     public float baseDetectionRange = 10.0f;
     public float playerDetectionRange = 5.0f;
 
+    private Animator animator;
+    private AIAnimationEventDispatcher eventDispatcher;
+
+    public UnityEvent AttackStartEvent;
+    public UnityEvent AttackStopEvent;
+    public UnityEvent StartWalkEvent;
+    public UnityEvent StopWalkEvent;
+
     private float lastAttackTime;
     private Transform currentTarget;
-    
-    [SerializeField]public bool targetTowers = true; //This bool controls Whether the enemy attacks a tower or the base.
+
+    [SerializeField] public bool targetTowers = true; //This bool controls Whether the enemy attacks a tower or the base.
     #endregion
 
     // Start is called before the first frame update
@@ -32,7 +41,9 @@ public class AIController : MonoBehaviour
         player = GameManager.GetInstance().GetPlayerController();
         playerTransform = player.transform;
         // GameObject.FindGameObjectWithTag("playerTransform").transform;
-        
+
+        animator.GetComponent<Animator>();
+        eventDispatcher = GetComponent<AIAnimationEventDispatcher>();
     }
 
     // Update is called once per frame
@@ -40,11 +51,11 @@ public class AIController : MonoBehaviour
     {
         FindClosestTarget();
 
-        if(currentTarget != null)
+        if (currentTarget != null)
         {
             float distanceToTarget = Vector3.Distance(transform.position, currentTarget.position);
 
-            if(distanceToTarget <= attackDistance)
+            if (distanceToTarget <= attackDistance)
             {
                 StopMoving();
                 AttackTarget(currentTarget);
@@ -69,9 +80,9 @@ public class AIController : MonoBehaviour
 
         //This if-else statement is to check whether the target towers check mark in the inspector in true or false.
         //If true it targets the nearest tower it's closest to.
-        if(targetTowers)
+        if (targetTowers)
         {
-            foreach(Transform target in towerTransform)
+            foreach (Transform target in towerTransform)
             {
                 float distance = Vector3.Distance(transform.position, target.position);
 
@@ -96,7 +107,7 @@ public class AIController : MonoBehaviour
         //This is just to chase after the player when they are at a certain range of the enemy.
         float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
 
-        if(distanceToPlayer < playerDetectionRange)
+        if (distanceToPlayer < playerDetectionRange)
         {
             closestTarget = playerTransform;
         }
@@ -106,10 +117,10 @@ public class AIController : MonoBehaviour
 
     private void AttackTarget(Transform target)
     {
-        if(Time.time - lastAttackTime >= attackCooldown)
+        if (Time.time - lastAttackTime >= attackCooldown)
         {
             IDamageable damageInterface = player.gameObject.GetComponent<IDamageable>();
-            if(damageInterface != null)
+            if (damageInterface != null)
             {
                 player.Damage(123.0f);
             }
@@ -125,6 +136,40 @@ public class AIController : MonoBehaviour
         Vector3 distanceToTarget = currentTarget.position - transform.position;
         transform.rotation = Quaternion.LookRotation(new Vector3(distanceToTarget.x, 0f, distanceToTarget.z));
         transform.Translate(Vector3.forward * movementSpeed * Time.deltaTime);
+    }
+    #endregion
+
+    #region Animation
+    public void AttackStart()
+    {
+        if (AttackStartEvent != null)
+        {
+            AttackStartEvent.Invoke();
+        }
+    }
+
+    public void AttackStop()
+    {
+        if (AttackStopEvent != null)
+        {
+            AttackStopEvent.Invoke();
+        }
+    }
+
+    public void StartWalk()
+    {
+        if (StartWalkEvent != null)
+        {
+            StartWalkEvent.Invoke();
+        }
+    }
+
+    public void StopWalk()
+    {
+        if (StopWalkEvent != null)
+        {
+            StopWalkEvent.Invoke();
+        }
     }
     #endregion
 }
