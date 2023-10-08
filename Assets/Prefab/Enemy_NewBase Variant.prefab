@@ -148,6 +148,66 @@ MonoBehaviour:
   attackCooldown: 2
   baseDetectionRange: 10
   playerDetectionRange: 5
+  AttackStartEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 240310849574828704}
+        m_TargetAssemblyTypeName: AIAnimationController, Assembly-CSharp
+        m_MethodName: StartAttack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  AttackStopEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 240310849574828704}
+        m_TargetAssemblyTypeName: AIAnimationController, Assembly-CSharp
+        m_MethodName: StopAttack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  StartWalkEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 240310849574828704}
+        m_TargetAssemblyTypeName: AIAnimationController, Assembly-CSharp
+        m_MethodName: StartMoving
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  StopWalkEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 240310849574828704}
+        m_TargetAssemblyTypeName: AIAnimationController, Assembly-CSharp
+        m_MethodName: StopMoving
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   targetTowers: 1
 --- !u!114 &240310849574828704
 MonoBehaviour:
@@ -174,75 +234,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c5b4de49ad8ddc4393ca78a8ecbd156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackStartEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 174102801}
-        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
-        m_MethodName: StartWalkAnimation
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  AttackStopEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 174102801}
-        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
-        m_MethodName: StopAttackAnimation
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  StartWalkEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 174102801}
-        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
-        m_MethodName: StartWalkAnimation
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  StopWalkEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 174102801}
-        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
-        m_MethodName: StopWalkAnimation
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 174102801}
-        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
-        m_MethodName: StopWalkAnimation
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2

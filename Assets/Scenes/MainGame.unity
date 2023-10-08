@@ -1749,6 +1749,54 @@ PrefabInstance:
       propertyPath: towerTransform.Array.data[1]
       value: 
       objectReference: {fileID: 607522185}
+    - target: {fileID: 174102801, guid: 446d5c473ef1289429390503013b64a2, type: 3}
+      propertyPath: StopWalkEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 174102801, guid: 446d5c473ef1289429390503013b64a2, type: 3}
+      propertyPath: StartWalkEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 174102801, guid: 446d5c473ef1289429390503013b64a2, type: 3}
+      propertyPath: AttackStopEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 174102801, guid: 446d5c473ef1289429390503013b64a2, type: 3}
+      propertyPath: AttackStartEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 174102801, guid: 446d5c473ef1289429390503013b64a2, type: 3}
+      propertyPath: StopWalkEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 174102801, guid: 446d5c473ef1289429390503013b64a2, type: 3}
+      propertyPath: StartWalkEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 174102801, guid: 446d5c473ef1289429390503013b64a2, type: 3}
+      propertyPath: AttackStopEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 174102801, guid: 446d5c473ef1289429390503013b64a2, type: 3}
+      propertyPath: AttackStartEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 174102801, guid: 446d5c473ef1289429390503013b64a2, type: 3}
+      propertyPath: StopWalkEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 174102801, guid: 446d5c473ef1289429390503013b64a2, type: 3}
+      propertyPath: StartWalkEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 174102801, guid: 446d5c473ef1289429390503013b64a2, type: 3}
+      propertyPath: AttackStopEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 174102801, guid: 446d5c473ef1289429390503013b64a2, type: 3}
+      propertyPath: AttackStartEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 928751225610996601, guid: 446d5c473ef1289429390503013b64a2,
         type: 3}
       propertyPath: StopWalkEvent.m_PersistentCalls.m_Calls.Array.size
@@ -1852,7 +1900,7 @@ PrefabInstance:
     - target: {fileID: 2835260623399449131, guid: 446d5c473ef1289429390503013b64a2,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -12.743097
+      value: -11.9
       objectReference: {fileID: 0}
     - target: {fileID: 2835260623399449131, guid: 446d5c473ef1289429390503013b64a2,
         type: 3}
@@ -1911,24 +1959,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b6b272159a4bd3498fdfbb7bd22210a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &1977947184 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3632562759981170769, guid: 446d5c473ef1289429390503013b64a2,
-    type: 3}
-  m_PrefabInstance: {fileID: 1796152500}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1977947187
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1977947184}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c5b4de49ad8ddc4393ca78a8ecbd156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2091709517 stripped

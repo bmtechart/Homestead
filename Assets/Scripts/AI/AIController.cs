@@ -10,29 +10,35 @@ using UnityEngine.Events;
 public class AIController : MonoBehaviour
 {
     #region Variables
+    [Header ("Enemy Controller")]
+    [Header("Move Towards")]
     public PlayerController player;
     public Transform playerTransform;
     public Transform[] towerTransform;
     public Transform playerBase;
 
+    [Header ("Variable")]
     public float movementSpeed = 5.0f;
     public float attackDistance = 1.0f;
     public float attackCooldown = 2.0f;
     public float baseDetectionRange = 10.0f;
     public float playerDetectionRange = 5.0f;
 
-    private Animator animator;
-    private AIAnimationEventDispatcher eventDispatcher;
-
+    [SerializeField] public bool targetTowers = true; //This bool controls Whether the enemy attacks a tower or the base.
+    
+    /*[Header ("Animation")]
     public UnityEvent AttackStartEvent;
     public UnityEvent AttackStopEvent;
     public UnityEvent StartWalkEvent;
-    public UnityEvent StopWalkEvent;
+    public UnityEvent StopWalkEvent;*/
+
+    //private Animator animator;
+    //private eventDispatcher = GetComponent<AIAnimationEventDispatcher>();
 
     private float lastAttackTime;
     private Transform currentTarget;
 
-    [SerializeField] public bool targetTowers = true; //This bool controls Whether the enemy attacks a tower or the base.
+    
     #endregion
 
     // Start is called before the first frame update
@@ -40,10 +46,9 @@ public class AIController : MonoBehaviour
     {
         player = GameManager.GetInstance().GetPlayerController();
         playerTransform = player.transform;
-        // GameObject.FindGameObjectWithTag("playerTransform").transform;
 
-        animator.GetComponent<Animator>();
-        eventDispatcher = GetComponent<AIAnimationEventDispatcher>();
+        //animator.GetComponent<Animator>();
+        //eventDispatcher = GetComponent<AIAnimationEventDispatcher>();
     }
 
     // Update is called once per frame
@@ -59,12 +64,24 @@ public class AIController : MonoBehaviour
             {
                 StopMoving();
                 AttackTarget(currentTarget);
+
+                //AttackStart();
+
+                //StopMoving();
             }
             else
             {
                 MoveTowardsPlayer();
+
+                //StartWalk();
             }
         }
+        /*else
+        {
+            AttackStop();
+
+            StartWalk();
+        }*/
     }
 
     #region Main Behavior
@@ -132,7 +149,6 @@ public class AIController : MonoBehaviour
 
     private void MoveTowardsPlayer()
     {
-        //transform.LookAt(currentTarget);
         Vector3 distanceToTarget = currentTarget.position - transform.position;
         transform.rotation = Quaternion.LookRotation(new Vector3(distanceToTarget.x, 0f, distanceToTarget.z));
         transform.Translate(Vector3.forward * movementSpeed * Time.deltaTime);
@@ -140,11 +156,11 @@ public class AIController : MonoBehaviour
     #endregion
 
     #region Animation
-    public void AttackStart()
+    /*public void AttackStart()
     {
         if (AttackStartEvent != null)
         {
-            AttackStartEvent.Invoke();
+            AttackStartEvent?.Invoke();
         }
     }
 
@@ -152,7 +168,7 @@ public class AIController : MonoBehaviour
     {
         if (AttackStopEvent != null)
         {
-            AttackStopEvent.Invoke();
+            AttackStopEvent?.Invoke();
         }
     }
 
@@ -160,7 +176,7 @@ public class AIController : MonoBehaviour
     {
         if (StartWalkEvent != null)
         {
-            StartWalkEvent.Invoke();
+            StartWalkEvent?.Invoke();
         }
     }
 
@@ -168,8 +184,8 @@ public class AIController : MonoBehaviour
     {
         if (StopWalkEvent != null)
         {
-            StopWalkEvent.Invoke();
+            StopWalkEvent?.Invoke();
         }
-    }
+    }*/
     #endregion
 }
