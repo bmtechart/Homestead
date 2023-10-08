@@ -42,6 +42,21 @@ public class HealthBehaviour : MonoBehaviour
         }
     }
 
+    public void Damage(float amount)
+    {
+        CurrentHealth -= amount;
+    }
+
+    public void Heal(float amount)
+    {
+        CurrentHealth += amount;
+    }
+
+    public void RestoreHealth()
+    {
+        CurrentHealth = maxHealth;
+    }
+
     private void Awake()
     {
         CurrentHealth = initialHealth;

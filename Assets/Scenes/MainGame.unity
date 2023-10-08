@@ -204,7 +204,7 @@ GameObject:
   - component: {fileID: 165911494}
   - component: {fileID: 165911493}
   - component: {fileID: 165911492}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Home Base Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}

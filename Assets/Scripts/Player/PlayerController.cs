@@ -36,7 +36,13 @@ public class PlayerController : MonoBehaviour, IDamageable
     public UnityEvent m_OnPlayerAttackCancel;
 
     [Header("Building")]
-    public UnityEvent m_OnPlayerBuildStart;
+    public UnityEvent m_OnPlayerEnterBuildMode;
+    public UnityEvent m_OnPlayerExitBuildMode;
+    public UnityEvent m_OnPlayerBuildStructure;
+    public UnityEvent m_OnPlayerSwapBuilding;
+
+    [Header("Damage")]
+    public UnityEvent<float> m_OnPlayerDamage;
     #endregion
 
     #region Runtime Callbacks
@@ -44,12 +50,14 @@ public class PlayerController : MonoBehaviour, IDamageable
     void Start()
     {
         playerInput = GetComponent<PlayerInput>();
-        SetInputContext("Day");
+        SetInputContext("Default");
     }
 
     #endregion
 
     #region Input Callbacks
+
+    #region Default
     public void OnMove(InputAction.CallbackContext ctx)
     {
         //get movement vector from input
@@ -60,24 +68,52 @@ public class PlayerController : MonoBehaviour, IDamageable
         if (ctx.phase == InputActionPhase.Canceled) { m_OnPlayerMoveCancel?.Invoke(movementVector); }
     }
 
-    public void OnDash(InputAction.CallbackContext ctx)
-    {
-
-    }
-
     public void OnEnterBuildMode(InputAction.CallbackContext ctx)
     {
-        if(ctx.phase == InputActionPhase.Started) { }
+        if(ctx.phase == InputActionPhase.Started) 
+        {
+            m_OnPlayerEnterBuildMode?.Invoke();
+        }
     }
 
-    public void OnUseEquipment(InputAction.CallbackContext ctx) 
+    public void OnUseEquipment(InputAction.CallbackContext ctx)
     {
-        if(ctx.phase == InputActionPhase.Started) { m_OnPlayerAttackStart?.Invoke(); }
-        if(ctx.phase == InputActionPhase.Canceled) { m_OnPlayerAttackCancel?.Invoke(); }
+        if (ctx.phase == InputActionPhase.Started) { m_OnPlayerAttackStart?.Invoke(); }
+        if (ctx.phase == InputActionPhase.Canceled) { m_OnPlayerAttackCancel?.Invoke(); }
     }
+
     #endregion
 
-    #region
+    #region Build Mode
+    public void OnExitBuildMode(InputAction.CallbackContext ctx)
+    {
+        if(ctx.phase == InputActionPhase.Started)
+        {
+            m_OnPlayerExitBuildMode?.Invoke();
+        }
+    }
+
+    public void OnBuild(InputAction.CallbackContext ctx)
+    {
+        if(ctx.phase == InputActionPhase.Started)
+        {
+            m_OnPlayerBuildStructure?.Invoke();
+        }
+    }
+
+    public void OnSwapBuilding(InputAction.CallbackContext ctx)
+    {
+        if(ctx.phase == InputActionPhase.Started)
+        {
+            m_OnPlayerSwapBuilding?.Invoke();   
+        }
+    }
+
+    #endregion
+
+    #endregion
+
+    #region Utility Functions
 
     public void SetInputContext(string mapName)
     {
@@ -89,7 +125,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     #region Damage Interface
     public void Damage(float damageAmount)
     {
-        throw new System.NotImplementedException();
+        m_OnPlayerDamage?.Invoke(damageAmount); 
     }
     #endregion
 }

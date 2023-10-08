@@ -2,109 +2,6 @@
     "name": "IA_PlayerCharacter",
     "maps": [
         {
-            "name": "Night",
-            "id": "c07322fb-4add-4069-a374-a3fdd835e0d3",
-            "actions": [
-                {
-                    "name": "Move",
-                    "type": "Value",
-                    "id": "3a18282b-6842-407f-9740-2375080dbdcc",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "Attack",
-                    "type": "Button",
-                    "id": "23c4c236-14af-4091-93d1-0736d0c11fd0",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "WASD",
-                    "id": "0dc8cb8e-88e9-4546-814d-d62945989f28",
-                    "path": "2DVector",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "up",
-                    "id": "1f9fdfb6-1993-43f9-95c7-f1356cfe7499",
-                    "path": "<Keyboard>/w",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "bbf4f920-0365-4022-9eef-b49fdd5c0577",
-                    "path": "<Keyboard>/s",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "5388460a-4393-4c81-9acb-be518bbb323c",
-                    "path": "<Keyboard>/a",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "9c1f0ada-09ad-4f5f-91fa-1d5a62b24e92",
-                    "path": "<Keyboard>/d",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "a3d1630e-9f6f-4c96-933e-4b7e26f2c521",
-                    "path": "<Gamepad>/leftStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "04dc5e02-7574-4caf-9e4f-7240f52d5ee6",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Attack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
-        },
-        {
             "name": "UI",
             "id": "7158090d-a774-445d-9ca8-6c552856080d",
             "actions": [
@@ -133,18 +30,9 @@
             ]
         },
         {
-            "name": "Day",
+            "name": "Default",
             "id": "e24c35b6-6a54-4477-88b9-c31e5377c0c5",
             "actions": [
-                {
-                    "name": "Build",
-                    "type": "Button",
-                    "id": "eaa8734b-c98f-4daf-8c81-9218f5e60c57",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
                 {
                     "name": "Move",
                     "type": "Value",
@@ -155,9 +43,18 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "SwapBuilding",
+                    "name": "EnterBuildMode",
                     "type": "Button",
-                    "id": "13f8c543-1e07-4093-8d24-6f6c7045926e",
+                    "id": "2de7a04e-37e5-42eb-b7f4-8ac55b21603b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "UseTool",
+                    "type": "Button",
+                    "id": "addd902d-e6c5-4f01-b83c-d3b26627eed9",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -165,17 +62,6 @@
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "17f8a7d5-3256-4404-8cec-ed819850a7b8",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Build",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "WASD",
                     "id": "ce01580a-3be7-4a27-8c39-4f2b71ec2223",
@@ -244,8 +130,162 @@
                 },
                 {
                     "name": "",
-                    "id": "7bed8ec7-456a-4762-8b4e-3a692143f1c1",
-                    "path": "",
+                    "id": "5ec5225b-721d-4725-af34-578e8ee444ea",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EnterBuildMode",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fdb98ce4-b4ce-480d-8ca6-de47bbf3b21a",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UseTool",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "BuildMode",
+            "id": "7c7f1af8-cbfa-4b59-80ad-19a81ef6a413",
+            "actions": [
+                {
+                    "name": "Move",
+                    "type": "Value",
+                    "id": "e33f469d-bca4-4688-b640-606358938c7d",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "SwapBuilding",
+                    "type": "Value",
+                    "id": "6142e72c-a6c9-471a-a02c-21310011f223",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Build",
+                    "type": "Button",
+                    "id": "619db8c3-5912-4fc9-ad3d-793ce80bd427",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ExitBuildMode",
+                    "type": "Button",
+                    "id": "b8839c1f-2db9-4a44-babd-f18bff0873b0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "WASD",
+                    "id": "e701d040-3e71-4c78-99b1-8dd0742a85b4",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "8f43582f-18ed-4ef3-90d2-481c74eb6e7a",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "10a68a4e-9a40-47fb-8606-4ad250dcb987",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "923f53e5-a4de-4fbc-8fe8-cd8b8da4fb0e",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "28f58e26-b612-42d3-94cc-9c908810f6e1",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "445161c6-6691-46de-81b7-53332ddf855e",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d1e6bac2-8b5d-43ce-bce2-5447d8d733ca",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ExitBuildMode",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "990a7d9d-fed3-43bb-81bb-fdde1d537be2",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Build",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7e4e408d-4a3e-422f-8fe0-cd585d3b27c4",
+                    "path": "<Mouse>/scroll/up",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

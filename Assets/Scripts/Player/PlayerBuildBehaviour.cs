@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerBuildBehaviour : MonoBehaviour
 {
-    public GameObject ConstructionPrefab;
+    public GameObject selectedBuildingPrefab;
 
     private GameObject buildingPreview;
     // Start is called before the first frame update
@@ -22,13 +22,34 @@ public class PlayerBuildBehaviour : MonoBehaviour
         }
     }
 
-    public void StartBuildingPlacement()
+    public void OnEnterBuildMode()
     {
-        buildingPreview = Instantiate(ConstructionPrefab);
+        buildingPreview = Instantiate(selectedBuildingPrefab);
+        //instantiate selectedBuildingPrefab
     }
 
-    public void StopBuildingPlacement()
+    public void OnExitBuildMode()
     {
-        buildingPreview = null;
+        Destroy(buildingPreview);
+        //destroy currently selected prefab
+    }
+
+    public void OnSwapBuilding(int index)
+    {
+        Destroy(buildingPreview);
+        //increment building Index
+        //set selectedBuildingPrefab based on new index
+        //buildingPreview = Instantiate(selectedBuildingPrefab);
+    }
+
+    public void Build()
+    {
+        buildingPreview.GetComponent<BuildingController>().Build();
+        /*
+        GameObject newBuilding = Instantiate(buildingPreview);
+        newBuilding.transform.SetPositionAndRotation(buildingPreview.transform.position, buildingPreview.transform.rotation);
+        BuildingController newBuildingController = newBuilding.GetComponent<BuildingController>();
+        if (newBuildingController) newBuildingController.Build();
+        */
     }
 }
