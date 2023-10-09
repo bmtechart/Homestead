@@ -25,17 +25,17 @@ PrefabInstance:
     - target: {fileID: 5304911586177118974, guid: 176299a76ecfc7544b22a66fae200ac7,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.1749606
+      value: 6.090261
       objectReference: {fileID: 0}
     - target: {fileID: 5304911586177118974, guid: 176299a76ecfc7544b22a66fae200ac7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.00000047683716
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5304911586177118974, guid: 176299a76ecfc7544b22a66fae200ac7,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -11.951398
+      value: -11.9
       objectReference: {fileID: 0}
     - target: {fileID: 5304911586177118974, guid: 176299a76ecfc7544b22a66fae200ac7,
         type: 3}
@@ -125,7 +125,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7982078904327241941}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &174102801
+--- !u!114 &7264281505929422939
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -139,98 +139,57 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   playerTransform: {fileID: 0}
-  towerTransform:
-  - {fileID: 0}
-  - {fileID: 0}
+  towerTransform: []
   playerBase: {fileID: 0}
   movementSpeed: 5
+  attackDistance: 1
+  attackCooldown: 2
+  baseDetectionRange: 10
+  playerDetectionRange: 5
+  targetTowers: 1
+--- !u!114 &1962993272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4976212243588791767}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8a62c046f7b2854ba0e41df20332695, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  playerTransform: {fileID: 0}
+  towerTransforms:
+  - {fileID: 0}
+  playerBase: {fileID: 0}
   attackDistance: 2
   attackCooldown: 2
   baseDetectionRange: 10
   playerDetectionRange: 5
-  AttackStartEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 240310849574828704}
-        m_TargetAssemblyTypeName: AIAnimationController, Assembly-CSharp
-        m_MethodName: StartAttack
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  AttackStopEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 240310849574828704}
-        m_TargetAssemblyTypeName: AIAnimationController, Assembly-CSharp
-        m_MethodName: StopAttack
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  StartWalkEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 240310849574828704}
-        m_TargetAssemblyTypeName: AIAnimationController, Assembly-CSharp
-        m_MethodName: StartMoving
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  StopWalkEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 240310849574828704}
-        m_TargetAssemblyTypeName: AIAnimationController, Assembly-CSharp
-        m_MethodName: StopMoving
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  movementSpeed: 4
+  turnSpeed: 1
   targetTowers: 1
---- !u!114 &240310849574828704
-MonoBehaviour:
+--- !u!195 &1962993273
+NavMeshAgent:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4976212243588791767}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb949f3f8ece1ca4fb3d5ba0f9f62207, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skeletalMesh: {fileID: 4976212243588791767}
---- !u!114 &928751225610996601
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4976212243588791767}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c5b4de49ad8ddc4393ca78a8ecbd156, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Enabled: 0
+  m_AgentTypeID: 0
+  m_Radius: 1
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 2
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4

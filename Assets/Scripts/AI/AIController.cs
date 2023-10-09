@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
+using UnityEngine.AI;
 
 /// <summary>
 /// base class that all AI in the game will inherit from
@@ -9,36 +9,41 @@ using UnityEngine.Events;
 /// </summary>
 public class AIController : MonoBehaviour
 {
-    #region Variables
+    #region Targets
     [Header ("Enemy Controller")]
     [Header("Move Towards")]
     public PlayerController player;
     public Transform playerTransform;
     public Transform[] towerTransform;
     public Transform playerBase;
+    #endregion
 
-    [Header ("Variable")]
-    public float movementSpeed = 5.0f;
-    public float attackDistance = 1.0f;
-    public float attackCooldown = 2.0f;
-    public float baseDetectionRange = 10.0f;
-    public float playerDetectionRange = 5.0f;
+    #region Variables
+    [Header ("Variables")]
+    [SerializeField] private float movementSpeed = 5.0f;
+    [SerializeField] private float attackDistance = 1.0f;
+    [SerializeField] private float attackCooldown = 2.0f;
+    [SerializeField] private float baseDetectionRange = 10.0f;
+    [SerializeField] private float playerDetectionRange = 5.0f;
 
-    [SerializeField] public bool targetTowers = true; //This bool controls Whether the enemy attacks a tower or the base.
-    
-    /*[Header ("Animation")]
-    public UnityEvent AttackStartEvent;
-    public UnityEvent AttackStopEvent;
-    public UnityEvent StartWalkEvent;
-    public UnityEvent StopWalkEvent;*/
+    [SerializeField] private bool targetTowers = true; //This bool controls Whether the enemy attacks a tower or the base.
 
-    //private Animator animator;
-    //private eventDispatcher = GetComponent<AIAnimationEventDispatcher>();
-
+    private Animator animator;
+    private bool isMoving;
+    private Vector3 lastPosition;
     private float lastAttackTime;
     private Transform currentTarget;
+    #endregion
 
-    
+    #region AIState Enum
+    private enum AIState
+    {
+        Idle,
+        Moving,
+        Attacking
+    }
+
+    private AIState aiState = AIState.Idle;
     #endregion
 
     // Start is called before the first frame update
@@ -46,15 +51,18 @@ public class AIController : MonoBehaviour
     {
         player = GameManager.GetInstance().GetPlayerController();
         playerTransform = player.transform;
-
-        //animator.GetComponent<Animator>();
-        //eventDispatcher = GetComponent<AIAnimationEventDispatcher>();
+        animator = GetComponentInChildren<Animator>();
+        lastPosition = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
         FindClosestTarget();
+
+        UpdateAIState();
+
+        UpdateAnimation();
 
         if (currentTarget != null)
         {
@@ -65,23 +73,12 @@ public class AIController : MonoBehaviour
                 StopMoving();
                 AttackTarget(currentTarget);
 
-                //AttackStart();
-
-                //StopMoving();
             }
             else
             {
                 MoveTowardsPlayer();
-
-                //StartWalk();
             }
         }
-        /*else
-        {
-            AttackStop();
-
-            StartWalk();
-        }*/
     }
 
     #region Main Behavior
@@ -155,37 +152,50 @@ public class AIController : MonoBehaviour
     }
     #endregion
 
-    #region Animation
-    /*public void AttackStart()
+    #region AI Animation Enum
+    private void UpdateAIState()
     {
-        if (AttackStartEvent != null)
+        // Check if the AI is within the attack distance
+        if (currentTarget != null)
         {
-            AttackStartEvent?.Invoke();
+            float distanceToTarget = Vector3.Distance(transform.position, currentTarget.position);
+
+            if (distanceToTarget <= attackDistance)
+            {
+                // Set the AI state to attacking
+                aiState = AIState.Attacking;
+            }
+            else
+            {
+                // Set the AI state to moving
+                aiState = AIState.Moving;
+            }
+        }
+        else
+        {
+            // If there's no current target, set the AI state to idle
+            aiState = AIState.Idle;
         }
     }
 
-    public void AttackStop()
+    private void UpdateAnimation()
     {
-        if (AttackStopEvent != null)
+        // Check the AI state and update animations accordingly
+        switch (aiState)
         {
-            AttackStopEvent?.Invoke();
+            case AIState.Idle:
+                animator.SetBool("IsMoving", false);
+                animator.SetBool("IsAttacking", false);
+                break;
+            case AIState.Moving:
+                animator.SetBool("IsMoving", true);
+                animator.SetBool("IsAttacking", false);
+                break;
+            case AIState.Attacking:
+                animator.SetBool("IsMoving", false);
+                animator.SetBool("IsAttacking", true);
+                break;
         }
     }
-
-    public void StartWalk()
-    {
-        if (StartWalkEvent != null)
-        {
-            StartWalkEvent?.Invoke();
-        }
-    }
-
-    public void StopWalk()
-    {
-        if (StopWalkEvent != null)
-        {
-            StopWalkEvent?.Invoke();
-        }
-    }*/
     #endregion
 }
