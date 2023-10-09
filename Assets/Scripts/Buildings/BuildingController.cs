@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEditor;
@@ -13,21 +14,35 @@ public class BuildingController : MonoBehaviour
     private ConstructionCost[] constructionCosts;
 
     #region Properties
+    [DefaultValue(false)]
     public bool PreviewMode
     {
-        get { return _previewMode; }
-        set 
-        { 
+        get
+        {
+            return _previewMode;
+        }
+        set
+        {
             _previewMode = value;
+            if (value)
+            {
+                AssignPreviewMaterial();
+                Debug.Log("preview mode");
+            }
+
+            if (!value)
+            {
+                EnableCollision();
+            }
         }
     }
 
-    private bool _previewMode = true;
+    private bool _previewMode = false;
 
     #endregion
 
 
-    private bool canBePlaced = true;
+    public bool canBePlaced = true;
 
    
     public Material previewMaterial;
@@ -37,31 +52,22 @@ public class BuildingController : MonoBehaviour
     MeshCollider[] meshColliders;
     
     //original materials will replace preview material once built
-    Dictionary<MeshRenderer, Material[]> originalMaterial;
+    public Dictionary<MeshRenderer, Material[]> originalMaterial;
 
     #region Runtime Callbacks
+    public virtual void Awake()
+    {
+        CacheOriginalMaterials(); //once the building is built, it needs to replaced its basic material with
+    }
+
     // Start is called before the first frame update
     public virtual void Start()
     {
-
-        originalMaterial = new Dictionary<MeshRenderer, Material[]>();
         overlappingObjects = new List<GameObject>();    
         foundationVolume = GetComponent<BoxCollider>();
         meshColliders = GetComponentsInChildren<MeshCollider>();
-        CacheOriginalMaterials(); //once the building is built, it needs to replaced its basic material with
-        AssignPreviewMaterial();
-        Material newPreviewMaterial = new Material(previewMaterial); ;
-
-        foreach(MeshRenderer mr in GetComponentsInChildren<MeshRenderer>())
-        {
-            for(int i = 0; i < mr.materials.Length; i++)
-            {
-                mr.materials[i] = newPreviewMaterial;
-            }
-        }
-
-        PreviewMode = true;
-        
+        CacheOriginalMaterials();
+        //previewMaterial = new Material(previewMaterial);
     }
 
     public virtual void Update()
@@ -77,14 +83,16 @@ public class BuildingController : MonoBehaviour
     /// </summary>
     private void CacheOriginalMaterials()
     {
-        //create array of all mesh renderers in prefab
-        MeshRenderer[] meshRenderers = GetComponentsInChildren<MeshRenderer>();
+        originalMaterial = new Dictionary<MeshRenderer, Material[]>();
+  
 
         //populate dictionary storing all the base materials for each mesh renderer on the object
-        foreach(MeshRenderer mr in meshRenderers)
+        foreach(MeshRenderer mr in GetComponentsInChildren<MeshRenderer>())
         {
-            originalMaterial.Add(mr, mr.materials);
-            Debug.Log(mr.materials.ToString());
+            Material[] mats = new Material[mr.materials.Length];
+            mats = mr.materials;
+
+            originalMaterial.Add(mr, mats);
         }
     }
 
@@ -128,7 +136,7 @@ public class BuildingController : MonoBehaviour
 
     private void AssignPreviewMaterial()
     {
-        foreach(MeshRenderer mr in originalMaterial.Keys)
+        foreach(MeshRenderer mr in GetComponentsInChildren<MeshRenderer>())
         {
             Material[] mats = mr.materials;
             for(int i=0; i<mats.Length; i++)
@@ -144,6 +152,7 @@ public class BuildingController : MonoBehaviour
     /// </summary>
     private void SetPreviewMaterialColor(bool buildable)
     {
+        if (!_previewMode) return;
         Color previewColor;
         if (buildable)
         {
@@ -154,14 +163,17 @@ public class BuildingController : MonoBehaviour
             previewColor = Color.red;
         }
 
-        foreach (MeshRenderer mr in originalMaterial.Keys)
+        //GetComponentInChildren<MeshRenderer>().sharedMaterial.color = previewColor;
+
+        foreach(MeshRenderer mr in GetComponentsInChildren<MeshRenderer>())
         {
-            
-            for (int i = 0; i < mr.materials.Length; i++)
+            Material[] mats = mr.materials;
+            foreach(Material m in mats)
             {
-                mr.materials[i].color = previewColor;
+                m.color = previewColor;
             }
         }
+        previewMaterial.color = previewColor;
     }
     #endregion
 
@@ -170,19 +182,13 @@ public class BuildingController : MonoBehaviour
     {
         if (!canBePlaced)
         {
+            Destroy(gameObject);
             //play negative sound queue
             return;
         }
 
-        GameObject newBuilding = Instantiate(gameObject);
-        newBuilding.transform.SetLocalPositionAndRotation(gameObject.transform.position, gameObject.transform.rotation);
-        BuildingController newBuildingController = newBuilding.GetComponent<BuildingController>();
-        if(newBuildingController)
-        {
-            newBuildingController.PreviewMode = false;
-            newBuildingController.EnableCollision();
-            newBuildingController.ReassignOriginalMaterials();
-        }
+        //play particle effect
+        //play whatever animations we want
     }
 
     public void EnableCollision()
@@ -197,7 +203,11 @@ public class BuildingController : MonoBehaviour
     {
         foreach(MeshRenderer mr in GetComponentsInChildren<MeshRenderer>())
         {
-            Material[] mats = originalMaterial[mr];
+            Material[] mats = mr.materials;
+            for (int i = 0;i < mats.Length;i++)
+            {
+                mats[i] = originalMaterial[mr][i];
+            }
             mr.materials = mats;
         }
     }

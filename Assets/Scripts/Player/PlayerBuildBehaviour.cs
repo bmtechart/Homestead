@@ -16,6 +16,7 @@ public class PlayerBuildBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //building preview follows mouse cursor
         if(buildingPreview)
         {
             buildingPreview.transform.position = GameManager.GetInstance().GetCursorController().transform.position;
@@ -25,6 +26,7 @@ public class PlayerBuildBehaviour : MonoBehaviour
     public void OnEnterBuildMode()
     {
         buildingPreview = Instantiate(selectedBuildingPrefab);
+        buildingPreview.GetComponent<BuildingController>().PreviewMode = true;
         //instantiate selectedBuildingPrefab
     }
 
@@ -37,6 +39,7 @@ public class PlayerBuildBehaviour : MonoBehaviour
     public void OnSwapBuilding(int index)
     {
         Destroy(buildingPreview);
+        //buildingPreview = newBuildingPrefa from index;
         //increment building Index
         //set selectedBuildingPrefab based on new index
         //buildingPreview = Instantiate(selectedBuildingPrefab);
@@ -44,7 +47,11 @@ public class PlayerBuildBehaviour : MonoBehaviour
 
     public void Build()
     {
-        buildingPreview.GetComponent<BuildingController>().Build();
+        if (!buildingPreview.GetComponent<BuildingController>().canBePlaced) return;
+        GameObject newBuilding = Instantiate(selectedBuildingPrefab);
+        newBuilding.transform.SetPositionAndRotation(buildingPreview.transform.position, buildingPreview.transform.rotation);
+        newBuilding.GetComponent<BuildingController>().Build();
+        newBuilding.GetComponent<BuildingController>().PreviewMode=false;   
         /*
         GameObject newBuilding = Instantiate(buildingPreview);
         newBuilding.transform.SetPositionAndRotation(buildingPreview.transform.position, buildingPreview.transform.rotation);
