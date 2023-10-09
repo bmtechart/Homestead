@@ -7,47 +7,51 @@ using UnityEngine.AI;
 /// base class that all AI in the game will inherit from
 /// this includes towerTransform and enemies
 /// </summary>
-public class AIController : MonoBehaviour
+public class AIController : Singleton<AIController>
 {
+    /// <summary>
+    /// -make sure that the AI Controller is the parent class and its children inherit from that (a lot of private variables will need to become protected)
+    /// -AI Send out events giving some information like their position, who they are tracking, etc.
+    /// </summary>
     #region Targets
     [Header ("Enemy Controller")]
     [Header("Move Towards")]
-    public PlayerController player;
-    public Transform playerTransform;
-    public Transform[] towerTransform;
-    public Transform playerBase;
+    [SerializeField] protected PlayerController player;
+    [SerializeField] protected Transform playerTransform;
+    [SerializeField] protected Transform[] towerTransform;
+    [SerializeField] protected Transform playerBase;
     #endregion
 
     #region Variables
     [Header ("Variables")]
-    [SerializeField] private float movementSpeed = 5.0f;
-    [SerializeField] private float attackDistance = 1.0f;
-    [SerializeField] private float attackCooldown = 2.0f;
-    [SerializeField] private float baseDetectionRange = 10.0f;
-    [SerializeField] private float playerDetectionRange = 5.0f;
+    [SerializeField] protected float movementSpeed = 5.0f;
+    [SerializeField] protected float attackDistance = 1.0f;
+    [SerializeField] protected float attackCooldown = 2.0f;
+    [SerializeField] protected float baseDetectionRange = 10.0f;
+    [SerializeField] protected float playerDetectionRange = 5.0f;
 
-    [SerializeField] private bool targetTowers = true; //This bool controls Whether the enemy attacks a tower or the base.
+    [SerializeField] protected bool targetTowers = true; //This bool controls Whether the enemy attacks a tower or the base.
 
-    private Animator animator;
-    private bool isMoving;
-    private Vector3 lastPosition;
-    private float lastAttackTime;
-    private Transform currentTarget;
+    protected Animator animator;
+    protected bool isMoving;
+    protected Vector3 lastPosition;
+    protected float lastAttackTime;
+    protected Transform currentTarget;
     #endregion
 
     #region AIState Enum
-    private enum AIState
+    protected enum AIState
     {
         Idle,
         Moving,
         Attacking
     }
 
-    private AIState aiState = AIState.Idle;
+    protected AIState aiState = AIState.Idle;
     #endregion
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         player = GameManager.GetInstance().GetPlayerController();
         playerTransform = player.transform;
@@ -56,7 +60,7 @@ public class AIController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         FindClosestTarget();
 
