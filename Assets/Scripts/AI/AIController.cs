@@ -1,13 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 /// <summary>
 /// base class that all AI in the game will inherit from
 /// this includes towerTransform and enemies
 /// </summary>
-public class AIController : Singleton<AIController>
+public class AIController : MonoBehaviour
 {
     /// <summary>
     /// -make sure that the AI Controller is the parent class and its children inherit from that (a lot of private variables will need to become protected)
@@ -29,6 +28,7 @@ public class AIController : Singleton<AIController>
     [SerializeField] protected float attackCooldown = 2.0f;
     [SerializeField] protected float baseDetectionRange = 10.0f;
     [SerializeField] protected float playerDetectionRange = 5.0f;
+    [SerializeField] protected float enemyDamage = 123.0f;
 
     [SerializeField] protected bool targetTowers = true; //This bool controls Whether the enemy attacks a tower or the base.
 
@@ -63,9 +63,7 @@ public class AIController : Singleton<AIController>
     protected virtual void Update()
     {
         FindClosestTarget();
-
         UpdateAIState();
-
         UpdateAnimation();
 
         if (currentTarget != null)
@@ -86,12 +84,12 @@ public class AIController : Singleton<AIController>
     }
 
     #region Main Behavior
-    private void StopMoving()
+    protected virtual void StopMoving()
     {
         //The function doesn't do anything, but just stops it's movement.
     }
 
-    private void FindClosestTarget() //This entire function is to calculate which is the closest target that is assigned to.
+    protected virtual void FindClosestTarget()
     {
         float closestDistance = Mathf.Infinity;
         Transform closestTarget = null;
@@ -140,7 +138,7 @@ public class AIController : Singleton<AIController>
             IDamageable damageInterface = player.gameObject.GetComponent<IDamageable>();
             if (damageInterface != null)
             {
-                player.Damage(123.0f);
+                player.Damage(enemyDamage);
             }
             Debug.Log("Attack");
         }
@@ -148,7 +146,7 @@ public class AIController : Singleton<AIController>
         lastAttackTime = Time.time;
     }
 
-    private void MoveTowardsPlayer()
+    protected virtual void MoveTowardsPlayer()
     {
         Vector3 distanceToTarget = currentTarget.position - transform.position;
         transform.rotation = Quaternion.LookRotation(new Vector3(distanceToTarget.x, 0f, distanceToTarget.z));
@@ -157,7 +155,7 @@ public class AIController : Singleton<AIController>
     #endregion
 
     #region AI Animation Enum
-    private void UpdateAIState()
+    protected virtual void UpdateAIState()
     {
         // Check if the AI is within the attack distance
         if (currentTarget != null)
@@ -182,7 +180,7 @@ public class AIController : Singleton<AIController>
         }
     }
 
-    private void UpdateAnimation()
+    protected virtual void UpdateAnimation()
     {
         // Check the AI state and update animations accordingly
         switch (aiState)
