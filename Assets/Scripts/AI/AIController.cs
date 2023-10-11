@@ -15,8 +15,8 @@ public class AIController : MonoBehaviour
     #region Targets
     [Header ("Enemy Controller")]
     [Header("Move Towards")]
-    [SerializeField] protected PlayerController player;
-    [SerializeField] protected Transform playerTransform;
+    protected PlayerController player;
+    protected Transform playerTransform;
     [SerializeField] protected Transform[] towerTransform;
     [SerializeField] protected Transform playerBase;
     #endregion
@@ -148,9 +148,12 @@ public class AIController : MonoBehaviour
 
     protected virtual void MoveTowardsPlayer()
     {
-        Vector3 distanceToTarget = currentTarget.position - transform.position;
-        transform.rotation = Quaternion.LookRotation(new Vector3(distanceToTarget.x, 0f, distanceToTarget.z));
-        transform.Translate(Vector3.forward * movementSpeed * Time.deltaTime);
+        if(player != null)
+        {
+            Vector3 distanceToTarget = currentTarget.position - transform.position;
+            transform.rotation = Quaternion.LookRotation(new Vector3(distanceToTarget.x, 0f, distanceToTarget.z));
+            transform.Translate(Vector3.forward * movementSpeed * Time.deltaTime);
+        }
     }
     #endregion
 
