@@ -37,12 +37,12 @@ public class PlayerAnimationController : MonoBehaviour
     public void StartAttack()
     {
         if(!_animator) { return; }
-        _animator.SetTrigger("startAttack");
+        _animator.SetTrigger("AttackStart");
     }
 
     public void StopAttack()
     {
         if (!_animator) { return; }
-        _animator.SetTrigger("stopAttack");
+        _animator.SetTrigger("AttackStop");
     }
 }
