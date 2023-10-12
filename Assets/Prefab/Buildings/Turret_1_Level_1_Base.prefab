@@ -130,7 +130,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca4acb94dbf20ae458e8d5d828609881, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  constructionCosts: []
+  constructionCosts:
+  - resourceType: 0
+    resourceAmount: 6
+  - resourceType: 0
+    resourceAmount: 15
+  canBePlaced: 1
   previewMaterial: {fileID: 2100000, guid: a8467ebc6dd0e8846a84188798de97a3, type: 2}
 --- !u!65 &17360695733113909
 BoxCollider:
