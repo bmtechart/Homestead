@@ -15,6 +15,7 @@ public class GameManager : Singleton<GameManager>
 
     private PlayerController playerController;
     private CursorController cursorController;
+    private BuildingController buildingController;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,8 +42,16 @@ public class GameManager : Singleton<GameManager>
         return playerController;
     }
 
-    
+    public BuildingController GetBuildingController()
+    {
+        if (!buildingController)
+        {
+            buildingController = FindObjectOfType<BuildingController>();
+        }
 
+        return buildingController;
+
+    }
     // Update is called once per frame
     void Update()
     {

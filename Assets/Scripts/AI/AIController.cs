@@ -17,6 +17,7 @@ public class AIController : MonoBehaviour
     [Header("Move Towards")]
     protected PlayerController player;
     protected Transform playerTransform;
+    //protected BuildingController building;
     [SerializeField] protected Transform[] towerTransform;
     [SerializeField] protected Transform playerBase;
     #endregion
@@ -55,6 +56,8 @@ public class AIController : MonoBehaviour
     {
         player = GameManager.GetInstance().GetPlayerController();
         playerTransform = player.transform;
+        //building = GameManager.GetInstance().GetBuildingController();
+        //towerTransform = building.transform;
         animator = GetComponentInChildren<Animator>();
         lastPosition = transform.position;
     }

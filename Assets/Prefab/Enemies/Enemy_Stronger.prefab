@@ -50,7 +50,7 @@ MonoBehaviour:
   towerTransform: []
   playerBase: {fileID: 0}
   movementSpeed: 5
-  attackDistance: 1
+  attackDistance: 2
   attackCooldown: 2
   baseDetectionRange: 10
   playerDetectionRange: 5
