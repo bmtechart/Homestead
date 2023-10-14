@@ -45,7 +45,8 @@ public class AIController : MonoBehaviour
     {
         Idle,
         Moving,
-        Attacking
+        Attacking,
+        Death
     }
 
     protected AIState aiState = AIState.Idle;
@@ -90,6 +91,9 @@ public class AIController : MonoBehaviour
     protected virtual void StopMoving()
     {
         //The function doesn't do anything, but just stops it's movement.
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
+
+        animator.SetBool("IsMoving", false);
     }
 
     protected virtual void FindClosestTarget()
@@ -184,6 +188,11 @@ public class AIController : MonoBehaviour
             // If there's no current target, set the AI state to idle
             aiState = AIState.Idle;
         }
+
+        if(aiState == AIState.Idle)
+        {
+            StopMoving();
+        }
     }
 
     protected virtual void UpdateAnimation()
@@ -194,14 +203,22 @@ public class AIController : MonoBehaviour
             case AIState.Idle:
                 animator.SetBool("IsMoving", false);
                 animator.SetBool("IsAttacking", false);
+                animator.SetBool("IsDead", false);
                 break;
             case AIState.Moving:
                 animator.SetBool("IsMoving", true);
                 animator.SetBool("IsAttacking", false);
+                animator.SetBool("IsDead", false);
                 break;
             case AIState.Attacking:
                 animator.SetBool("IsMoving", false);
                 animator.SetBool("IsAttacking", true);
+                animator.SetBool("IsDead", false);
+                break;
+            case AIState.Death:
+                animator.SetBool("IsMoving", false);
+                animator.SetBool("IsAttacking", false);
+                animator.SetBool("IsDead", true);
                 break;
         }
     }

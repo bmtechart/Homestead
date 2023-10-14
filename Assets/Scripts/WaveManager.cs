@@ -66,7 +66,7 @@ public class WaveManager : MonoBehaviour
         {
             for (int i = 0; i < waves[CurrentWave].enemies.Length; i++)
             {
-                Enemy enemy = Instantiate(waves[CurrentWave].enemies[i], SpawnPoint.transform);
+                GameObject enemy = Instantiate(waves[CurrentWave].enemies[i], SpawnPoint.transform);
 
                 enemy.transform.SetParent(SpawnPoint.transform);
 
@@ -80,7 +80,7 @@ public class WaveManager : MonoBehaviour
     [System.Serializable]
     public class Wave
     {
-        public Enemy[] enemies;
+        public GameObject[] enemies;
         public float BetweenEnemiesTime;
         public float NextWaveTime;
 

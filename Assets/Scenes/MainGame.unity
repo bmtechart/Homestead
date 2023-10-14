@@ -522,13 +522,18 @@ PrefabInstance:
     - target: {fileID: 1265548267929556051, guid: ee05fb8db0edee1498c3fc8ada6ee985,
         type: 3}
       propertyPath: towerTransform.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1265548267929556051, guid: ee05fb8db0edee1498c3fc8ada6ee985,
         type: 3}
       propertyPath: towerTransform.Array.data[0]
       value: 
       objectReference: {fileID: 1109774574}
+    - target: {fileID: 1265548267929556051, guid: ee05fb8db0edee1498c3fc8ada6ee985,
+        type: 3}
+      propertyPath: towerTransform.Array.data[1]
+      value: 
+      objectReference: {fileID: 607522185}
     - target: {fileID: 5406129121706708775, guid: ee05fb8db0edee1498c3fc8ada6ee985,
         type: 3}
       propertyPath: m_Name
@@ -1723,13 +1728,28 @@ PrefabInstance:
     - target: {fileID: 236136693332840990, guid: 11a6226b9bb83db4eb19604210ed7fd0,
         type: 3}
       propertyPath: targetTowers
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 236136693332840990, guid: 11a6226b9bb83db4eb19604210ed7fd0,
         type: 3}
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 232946910}
+    - target: {fileID: 236136693332840990, guid: 11a6226b9bb83db4eb19604210ed7fd0,
+        type: 3}
+      propertyPath: towerTransform.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 236136693332840990, guid: 11a6226b9bb83db4eb19604210ed7fd0,
+        type: 3}
+      propertyPath: towerTransform.Array.data[0]
+      value: 
+      objectReference: {fileID: 607522185}
+    - target: {fileID: 236136693332840990, guid: 11a6226b9bb83db4eb19604210ed7fd0,
+        type: 3}
+      propertyPath: towerTransform.Array.data[1]
+      value: 
+      objectReference: {fileID: 1109774574}
     - target: {fileID: 3471621141710744712, guid: 11a6226b9bb83db4eb19604210ed7fd0,
         type: 3}
       propertyPath: m_Name
