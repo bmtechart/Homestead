@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject SpawnPoint;
+    
 
     [SerializeField]
     private float countdown;
@@ -14,6 +13,10 @@ public class WaveManager : MonoBehaviour
     public Wave[] waves;
 
     public int CurrentWave = 0;
+
+
+    public Transform[] Spawnpoints;
+
 
 
     private bool ReadyCountDown; 
@@ -66,9 +69,11 @@ public class WaveManager : MonoBehaviour
         {
             for (int i = 0; i < waves[CurrentWave].enemies.Length; i++)
             {
-                Enemy enemy = Instantiate(waves[CurrentWave].enemies[i], SpawnPoint.transform);
+                Transform Spawn = Spawnpoints[Random.Range (0,Spawnpoints.Length)];
 
-                enemy.transform.SetParent(SpawnPoint.transform);
+                AIController enemy = Instantiate(waves[CurrentWave].enemies[i], Spawn.transform);
+
+                enemy.transform.SetParent(Spawn.transform);
 
                 yield return new WaitForSeconds(waves[CurrentWave].BetweenEnemiesTime);
             }
@@ -80,7 +85,7 @@ public class WaveManager : MonoBehaviour
     [System.Serializable]
     public class Wave
     {
-        public Enemy[] enemies;
+        public AIController[] enemies;
         public float BetweenEnemiesTime;
         public float NextWaveTime;
 
