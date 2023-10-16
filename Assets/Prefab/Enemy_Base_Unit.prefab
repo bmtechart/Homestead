@@ -12,6 +12,9 @@ GameObject:
   - component: {fileID: 236136693332840990}
   - component: {fileID: 1596971246153082283}
   - component: {fileID: 8460001171372619074}
+  - component: {fileID: 3426190437257370095}
+  - component: {fileID: 1069954295483307003}
+  - component: {fileID: 1545006802081793799}
   m_Layer: 0
   m_Name: Enemy_Base_Unit
   m_TagString: Untagged
@@ -47,6 +50,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b6b272159a4bd3498fdfbb7bd22210a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_OnTargetFound:
+    m_PersistentCalls:
+      m_Calls: []
   towerTransform:
   - {fileID: 0}
   playerBase: {fileID: 0}
@@ -87,6 +93,60 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!195 &3426190437257370095
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3471621141710744712}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &1069954295483307003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3471621141710744712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9568b4a40ca14e4fa497e31ddb8b994, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  maxHealth: 100
+  initialHealth: 100
+--- !u!114 &1545006802081793799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3471621141710744712}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91e227c9b21c7194684d767fcbffe736, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8686744877313442231
 PrefabInstance:
   m_ObjectHideFlags: 0

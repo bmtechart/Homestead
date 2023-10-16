@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerAnimationEventDispatcher : MonoBehaviour
 {
+    public UnityEvent m_OnAttackStart;
+    public UnityEvent m_OnAttackEnd;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +21,16 @@ public class PlayerAnimationEventDispatcher : MonoBehaviour
 
     public void AttackHit()
     {
-        Debug.Log("asdfasdf");
+
+    }
+
+    public void EnableHit()
+    {
+        m_OnAttackStart?.Invoke();
+    }
+
+    public void DisableHit()
+    {
+        m_OnAttackEnd?.Invoke();
     }
 }

@@ -5,5 +5,5 @@ using UnityEngine;
 
 public interface IDamageable
 {
-    void Damage(float damageAmount);
+    void Damage(GameObject source, float damageAmount);
 }

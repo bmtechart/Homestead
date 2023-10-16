@@ -16,10 +16,12 @@ using UnityEngine.InputSystem;
 /// </summary>
 
 [RequireComponent(typeof(PlayerInput))]
+[RequireComponent(typeof(HealthBehaviour))]
 public class PlayerController : MonoBehaviour, IDamageable
 {
     #region Components
     private PlayerInput playerInput;
+    private HealthBehaviour healthBehaviour;    
     #endregion
 
     #region Events
@@ -45,12 +47,19 @@ public class PlayerController : MonoBehaviour, IDamageable
     public UnityEvent<float> m_OnPlayerDamage;
     #endregion
 
+
+
     #region Runtime Callbacks
     // Start is called before the first frame update
     void Start()
     {
+        //initialize player input
         playerInput = GetComponent<PlayerInput>();
         SetInputContext("Default");
+
+        //bind death to game over
+        healthBehaviour = GetComponent<HealthBehaviour>();
+        healthBehaviour.OnDeath.AddListener(GameManager.GetInstance().GameOver);
     }
 
     #endregion
@@ -76,7 +85,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         }
     }
 
-    public void OnUseEquipment(InputAction.CallbackContext ctx)
+    public void OnAttack(InputAction.CallbackContext ctx)
     {
         if (ctx.phase == InputActionPhase.Started) { m_OnPlayerAttackStart?.Invoke(); }
         if (ctx.phase == InputActionPhase.Canceled) { m_OnPlayerAttackCancel?.Invoke(); }
@@ -123,7 +132,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     #endregion
 
     #region Damage Interface
-    public void Damage(float damageAmount)
+    public void Damage(GameObject source, float damageAmount)
     {
         m_OnPlayerDamage?.Invoke(damageAmount); 
     }

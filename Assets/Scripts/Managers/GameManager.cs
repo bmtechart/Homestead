@@ -41,7 +41,10 @@ public class GameManager : Singleton<GameManager>
         return playerController;
     }
 
-    
+    public void GameOver()
+    {
+        m_OnGameOver?.Invoke();
+    }
 
     // Update is called once per frame
     void Update()

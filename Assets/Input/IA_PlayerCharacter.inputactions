@@ -52,7 +52,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "UseTool",
+                    "name": "Attack",
                     "type": "Button",
                     "id": "addd902d-e6c5-4f01-b83c-d3b26627eed9",
                     "expectedControlType": "Button",
@@ -146,7 +146,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "UseTool",
+                    "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -95,8 +95,9 @@ GameObject:
   - component: {fileID: 4575036780082365878}
   - component: {fileID: 8375875342987110403}
   - component: {fileID: 17360695733113909}
+  - component: {fileID: 2262257309789984956}
   m_Layer: 0
-  m_Name: Turret_1_Level_1_Base
+  m_Name: PF_Tower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -133,7 +134,7 @@ MonoBehaviour:
   constructionCosts:
   - resourceType: 0
     resourceAmount: 6
-  - resourceType: 0
+  - resourceType: 1
     resourceAmount: 15
   canBePlaced: 1
   previewMaterial: {fileID: 2100000, guid: a8467ebc6dd0e8846a84188798de97a3, type: 2}
@@ -150,6 +151,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.26, y: 3.1864047, z: 4.15}
   m_Center: {x: -0.089144945, y: 1.5932021, z: -0.00000059604645}
+--- !u!208 &2262257309789984956
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7842888822707930003}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 1.98, y: 3.62, z: 1.98}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 1.38, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &8776248409055672934
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,7 +11,12 @@ public class PlayerAnimationController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (skeletalMesh == null) { return; }
+        if (skeletalMesh == null) 
+        {
+            Debug.Log("Animation Controller has no skeletal mesh game object assigned!");
+            return; 
+        }
+        
         _animator = skeletalMesh.GetComponent<Animator>();
     }
 
@@ -37,12 +42,13 @@ public class PlayerAnimationController : MonoBehaviour
     public void StartAttack()
     {
         if(!_animator) { return; }
-        _animator.SetTrigger("AttackStart");
+        _animator.SetTrigger("startAttack");
+        Debug.Log("AttackStart");
     }
 
     public void StopAttack()
     {
         if (!_animator) { return; }
-        _animator.SetTrigger("AttackStop");
+        _animator.SetTrigger("stopAttack");
     }
 }

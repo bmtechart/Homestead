@@ -25,7 +25,7 @@ public class ResourceHarvestingBehaviour : MonoBehaviour
         {
             IDamageable damageInterface = hit.rigidbody.gameObject.GetComponent<IDamageable>();
             if (damageInterface != null) { return; }
-            damageInterface.Damage(5.0f);
+            damageInterface.Damage(gameObject, 5.0f);
 
         }
         //draw a sphere trace to identify resource nodes in front of the player within their tool's reach. 

@@ -7,7 +7,7 @@ using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider))] //box collider used as trigger to see if the building can be placed
-public class BuildingController : MonoBehaviour
+public class BuildingController : MonoBehaviour, IDamageable
 {
     [Tooltip("Amount of each resource type that need to be consumed to place this building")]
     [SerializeField]
@@ -210,6 +210,12 @@ public class BuildingController : MonoBehaviour
             }
             mr.materials = mats;
         }
+    }
+
+    public virtual void Damage(GameObject source, float damageAmount)
+    {
+        //implement damage functionality here
+        throw new System.NotImplementedException();
     }
     #endregion
 }
