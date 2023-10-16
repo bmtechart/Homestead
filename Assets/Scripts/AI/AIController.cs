@@ -6,7 +6,9 @@ using UnityEngine;
 /// base class that all AI in the game will inherit from
 /// this includes towerTransform and enemies
 /// </summary>
-public class AIController : MonoBehaviour
+
+[RequireComponent(typeof(HealthBehaviour))]
+public class AIController : MonoBehaviour, IDamageable
 {
     /// <summary>
     /// -make sure that the AI Controller is the parent class and its children inherit from that (a lot of private variables will need to become protected)
@@ -121,7 +123,7 @@ public class AIController : MonoBehaviour
         {
             float distanceToBase = Vector3.Distance(transform.position, playerBase.position);
 
-            if (distanceToBase <= baseDetectionRange) ;
+            if (distanceToBase <= baseDetectionRange)
             {
                 closestTarget = playerBase;
             }
@@ -145,7 +147,7 @@ public class AIController : MonoBehaviour
             IDamageable damageInterface = player.gameObject.GetComponent<IDamageable>();
             if (damageInterface != null)
             {
-                player.Damage(enemyDamage);
+                player.Damage(gameObject, enemyDamage);
             }
             Debug.Log("Attack");
         }
@@ -221,6 +223,12 @@ public class AIController : MonoBehaviour
                 animator.SetBool("IsDead", true);
                 break;
         }
+    }
+
+    public void Damage(GameObject source, float damageAmount)
+    {
+        HealthBehaviour hb = GetComponent<HealthBehaviour>();
+        hb.Damage(damageAmount);
     }
     #endregion
 }
