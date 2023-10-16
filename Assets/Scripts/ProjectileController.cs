@@ -20,7 +20,7 @@ public class ProjectileController : MonoBehaviour
     {
         if(!target) { return; }
 
-        transform.position = (transform.position - target.transform.position) * (moveSpeed * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, target.transform.position, moveSpeed*Time.deltaTime);
         if(Vector3.Distance(transform.position, target.transform.position) <= collisionDistance)
         {
             //if target can be damaged, damage it

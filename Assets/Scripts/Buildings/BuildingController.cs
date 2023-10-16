@@ -5,8 +5,10 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(NavMeshObstacle))]
 [RequireComponent(typeof(BoxCollider))] //box collider used as trigger to see if the building can be placed
 public class BuildingController : MonoBehaviour, IDamageable
 {
@@ -27,13 +29,13 @@ public class BuildingController : MonoBehaviour, IDamageable
         set
         {
             _previewMode = value;
-            if (value)
+            if (_previewMode)
             {
                 AssignPreviewMaterial();
                 Debug.Log("preview mode");
             }
 
-            if (!value)
+            if (!_previewMode)
             {
                 EnableCollision();
             }
@@ -50,6 +52,7 @@ public class BuildingController : MonoBehaviour, IDamageable
    
     public Material previewMaterial;
 
+    private NavMeshObstacle navMeshObstacle;
     List<GameObject> overlappingObjects;
     BoxCollider foundationVolume;
     MeshCollider[] meshColliders;
@@ -69,6 +72,7 @@ public class BuildingController : MonoBehaviour, IDamageable
         overlappingObjects = new List<GameObject>();    
         foundationVolume = GetComponent<BoxCollider>();
         meshColliders = GetComponentsInChildren<MeshCollider>();
+        
         CacheOriginalMaterials();
         //previewMaterial = new Material(previewMaterial);
     }
@@ -189,7 +193,9 @@ public class BuildingController : MonoBehaviour, IDamageable
             //play negative sound queue
             return;
         }
-
+        EnableCollision();
+        PreviewMode = false;
+        
         m_OnBuildingConstructed?.Invoke();
         //play particle effect
         //play whatever animations we want

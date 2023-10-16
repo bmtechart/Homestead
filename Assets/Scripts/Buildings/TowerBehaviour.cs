@@ -19,9 +19,10 @@ public class TowerBehaviour : MonoBehaviour
     [SerializeField] private AIController target;
     [SerializeField] private float attackDelay;
     [SerializeField] private GameObject projectile;
+    [SerializeField] private Transform projectileSpawn;
 
     //variables
-    private List<AIController> enemiesInRange;
+    [SerializeField]private List<AIController> enemiesInRange;
     
 
     //components
@@ -88,17 +89,27 @@ public class TowerBehaviour : MonoBehaviour
 
     public void OnTowerBuild()
     {
-
+        towerRangeTrigger.enabled = true;
     }
 
     IEnumerator Attack()
     {
-        //spawn projectile
-        //replace this with pool
+        while (true)
+        {
+            //spawn projectile
+            //replace this with pool
+            Debug.Log("shoot!");
+            GameObject projectileInstance = Instantiate(projectile);
+            projectileInstance.transform.SetPositionAndRotation(projectileSpawn.position, projectileSpawn.rotation);
+            if (!projectileInstance) yield return new WaitForSeconds(attackDelay); ;
+            ProjectileController projectileController = projectile.GetComponent<ProjectileController>();
+            if (!projectileController) yield return new WaitForSeconds(attackDelay); ;
 
-        Instantiate(projectile, transform);
 
+            projectileController.target = target.gameObject;
+            projectileController.source = gameObject;
 
-        yield return new WaitForSeconds(attackDelay);
+            yield return new WaitForSeconds(attackDelay);
+        }
     }
 }
