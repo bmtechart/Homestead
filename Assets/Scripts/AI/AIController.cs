@@ -1,26 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 /// <summary>
 /// base class that all AI in the game will inherit from
 /// this includes towerTransform and enemies
 /// </summary>
-
-public enum TargetPriortiy
+public class AIController : MonoBehaviour
 {
-    Homestead,
-    Tower
-}
-
-[RequireComponent(typeof(HealthBehaviour))]
-[RequireComponent(typeof(AIMovementBehaviour))]
-public class AIController : MonoBehaviour, IDamageable
-{
-    public UnityEvent<GameObject> m_OnTargetFound; //when a viable target is found, broadcast this message
-
-
     /// <summary>
     /// -make sure that the AI Controller is the parent class and its children inherit from that (a lot of private variables will need to become protected)
     /// -AI Send out events giving some information like their position, who they are tracking, etc.
@@ -30,6 +17,7 @@ public class AIController : MonoBehaviour, IDamageable
     [Header("Move Towards")]
     protected PlayerController player;
     protected Transform playerTransform;
+    //protected BuildingController building;
     [SerializeField] protected Transform[] towerTransform;
     [SerializeField] protected Transform playerBase;
     #endregion
@@ -52,15 +40,13 @@ public class AIController : MonoBehaviour, IDamageable
     protected Transform currentTarget;
     #endregion
 
-    private HealthBehaviour healthBehaviour;
-    private Rigidbody rb;
-
     #region AIState Enum
     protected enum AIState
     {
         Idle,
         Moving,
-        Attacking
+        Attacking,
+        Death
     }
 
     protected AIState aiState = AIState.Idle;
@@ -69,16 +55,12 @@ public class AIController : MonoBehaviour, IDamageable
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        player = GameManager.GetInstance().GetPlayerController(); //returns player controller
-        playerTransform = player.transform; //store player position/rotation
+        player = GameManager.GetInstance().GetPlayerController();
+        playerTransform = player.transform;
+        //building = GameManager.GetInstance().GetBuildingController();
+        //towerTransform = building.transform;
         animator = GetComponentInChildren<Animator>();
         lastPosition = transform.position;
-
-        healthBehaviour = GetComponent<HealthBehaviour>();
-        rb = GetComponent<Rigidbody>();
-
-        //start by finding the closest appropriate target
-        //FindClosestTarget();
     }
 
     // Update is called once per frame
@@ -94,6 +76,7 @@ public class AIController : MonoBehaviour, IDamageable
 
             if (distanceToTarget <= attackDistance)
             {
+                StopMoving();
                 AttackTarget(currentTarget);
 
             }
@@ -105,6 +88,13 @@ public class AIController : MonoBehaviour, IDamageable
     }
 
     #region Main Behavior
+    protected virtual void StopMoving()
+    {
+        //The function doesn't do anything, but just stops it's movement.
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
+
+        animator.SetBool("IsMoving", false);
+    }
 
     protected virtual void FindClosestTarget()
     {
@@ -131,7 +121,7 @@ public class AIController : MonoBehaviour, IDamageable
         {
             float distanceToBase = Vector3.Distance(transform.position, playerBase.position);
 
-            if (distanceToBase <= baseDetectionRange);
+            if (distanceToBase <= baseDetectionRange) ;
             {
                 closestTarget = playerBase;
             }
@@ -146,18 +136,16 @@ public class AIController : MonoBehaviour, IDamageable
         }
 
         currentTarget = closestTarget;
-
-
     }
 
     private void AttackTarget(Transform target)
     {
         if (Time.time - lastAttackTime >= attackCooldown)
         {
-            IDamageable damageInterface = target.gameObject.GetComponent<IDamageable>();
+            IDamageable damageInterface = player.gameObject.GetComponent<IDamageable>();
             if (damageInterface != null)
             {
-                player.Damage(gameObject, enemyDamage);
+                player.Damage(enemyDamage);
             }
             Debug.Log("Attack");
         }
@@ -200,6 +188,11 @@ public class AIController : MonoBehaviour, IDamageable
             // If there's no current target, set the AI state to idle
             aiState = AIState.Idle;
         }
+
+        if(aiState == AIState.Idle)
+        {
+            StopMoving();
+        }
     }
 
     protected virtual void UpdateAnimation()
@@ -210,35 +203,24 @@ public class AIController : MonoBehaviour, IDamageable
             case AIState.Idle:
                 animator.SetBool("IsMoving", false);
                 animator.SetBool("IsAttacking", false);
+                animator.SetBool("IsDead", false);
                 break;
             case AIState.Moving:
                 animator.SetBool("IsMoving", true);
                 animator.SetBool("IsAttacking", false);
+                animator.SetBool("IsDead", false);
                 break;
             case AIState.Attacking:
                 animator.SetBool("IsMoving", false);
                 animator.SetBool("IsAttacking", true);
+                animator.SetBool("IsDead", false);
+                break;
+            case AIState.Death:
+                animator.SetBool("IsMoving", false);
+                animator.SetBool("IsAttacking", false);
+                animator.SetBool("IsDead", true);
                 break;
         }
     }
     #endregion
-
-    public void Damage(GameObject source, float damageAmount)
-    {
-        //push enemy away from object that damaged them
-        if(rb)
-        {
-            rb.AddForce((transform.position - source.transform.position) * 10);
-        }
-        //play damage sound
-        //damage unit
-        healthBehaviour.Damage(damageAmount);
-    }
-
-    public void OnDeath()
-    {
-        //play death animation
-        //play death sound
-        Destroy(gameObject);
-    }
 }
