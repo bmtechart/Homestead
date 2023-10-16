@@ -50,9 +50,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b6b272159a4bd3498fdfbb7bd22210a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_OnTargetFound:
-    m_PersistentCalls:
-      m_Calls: []
   towerTransform:
   - {fileID: 0}
   playerBase: {fileID: 0}
@@ -129,7 +126,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OnDeath:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3471621141710744712}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnHealthChanged:
     m_PersistentCalls:
       m_Calls: []

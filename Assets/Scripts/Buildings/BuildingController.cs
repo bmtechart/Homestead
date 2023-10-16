@@ -197,6 +197,7 @@ public class BuildingController : MonoBehaviour, IDamageable
         PreviewMode = false;
         
         m_OnBuildingConstructed?.Invoke();
+        TowerManager.GetInstance().AddTower(gameObject);
         //play particle effect
         //play whatever animations we want
     }
