@@ -96,6 +96,8 @@ GameObject:
   - component: {fileID: 8375875342987110403}
   - component: {fileID: 17360695733113909}
   - component: {fileID: 2262257309789984956}
+  - component: {fileID: 2409783245879421806}
+  - component: {fileID: 2831789450628172290}
   m_Layer: 0
   m_Name: PF_Tower
   m_TagString: Untagged
@@ -167,6 +169,36 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 1.38, z: 0}
   m_TimeToStationary: 0.5
+--- !u!135 &2409783245879421806
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7842888822707930003}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Radius: 7.22
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2831789450628172290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7842888822707930003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94246f9b8042df24085d01a5704ec530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetPriority: 0
+  turret: {fileID: 2992702749189903931}
+  target: {fileID: 0}
+  attackDelay: 3
+  projectile: {fileID: 0}
 --- !u!1 &8776248409055672934
 GameObject:
   m_ObjectHideFlags: 0

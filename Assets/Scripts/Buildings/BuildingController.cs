@@ -5,10 +5,13 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(BoxCollider))] //box collider used as trigger to see if the building can be placed
 public class BuildingController : MonoBehaviour, IDamageable
 {
+    public UnityEvent m_OnBuildingConstructed;
+
     [Tooltip("Amount of each resource type that need to be consumed to place this building")]
     [SerializeField]
     private ConstructionCost[] constructionCosts;
@@ -187,6 +190,7 @@ public class BuildingController : MonoBehaviour, IDamageable
             return;
         }
 
+        m_OnBuildingConstructed?.Invoke();
         //play particle effect
         //play whatever animations we want
     }

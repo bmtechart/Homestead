@@ -44,7 +44,11 @@ public class TowerBehaviour : MonoBehaviour
             }
         }
 
-        if(!target) { GetNextAvailableEnemy(); }
+        if(!target) 
+        {
+            StopCoroutine(Attack());
+            GetNextAvailableEnemy(); 
+        }
     }
     
     private void GetNextAvailableEnemy()
@@ -52,6 +56,7 @@ public class TowerBehaviour : MonoBehaviour
         if(enemiesInRange.Count == 0) { return; }
 
         target = enemiesInRange[0];
+        StartCoroutine(Attack());
 
     }
 
@@ -64,6 +69,7 @@ public class TowerBehaviour : MonoBehaviour
 
         enemiesInRange.Add(enemy);
         target = enemy;
+        StartCoroutine(Attack());
     }
 
     private void OnTriggerExit(Collider other)
@@ -73,11 +79,22 @@ public class TowerBehaviour : MonoBehaviour
         if(!enemiesInRange.Contains(enemy)) { return; }
 
         enemiesInRange.Remove(enemy);
+
+        if(enemiesInRange.Count == 0)
+        {
+            StopCoroutine(Attack());
+        }
+    }
+
+    public void OnTowerBuild()
+    {
+
     }
 
     IEnumerator Attack()
     {
         //spawn projectile
+        //replace this with pool
 
         Instantiate(projectile, transform);
 
