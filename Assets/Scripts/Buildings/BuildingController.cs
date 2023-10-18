@@ -79,7 +79,11 @@ public class BuildingController : MonoBehaviour, IDamageable
 
     public virtual void Update()
     {
-
+        if (!TowerManager.GetInstance().CanPlaceTowers)
+        {
+            canBePlaced = false;
+            SetPreviewMaterialColor(canBePlaced);
+        }
     }
     #endregion
 
@@ -120,7 +124,9 @@ public class BuildingController : MonoBehaviour, IDamageable
 
         if(overlappingObjects.Count > 0)
         {
+            
             canBePlaced = false;
+            if (!TowerManager.GetInstance().CanPlaceTowers) canBePlaced = false;
             SetPreviewMaterialColor(canBePlaced);
         }
     }
@@ -137,6 +143,7 @@ public class BuildingController : MonoBehaviour, IDamageable
         if(overlappingObjects.Count <= 0)
         {
             canBePlaced = true;
+            if (!TowerManager.GetInstance().CanPlaceTowers) canBePlaced = false;
             SetPreviewMaterialColor(canBePlaced);
         }
     }

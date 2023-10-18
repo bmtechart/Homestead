@@ -18,7 +18,7 @@ public class TowerManager : Singleton<TowerManager>
         }
     }
 
-    private GameObject[] currentTowers;
+    private List<GameObject> currentTowers;
     public bool CanPlaceTowers;
 
     public UnityEvent<int> m_OnTowerBuilt;
@@ -26,14 +26,14 @@ public class TowerManager : Singleton<TowerManager>
 
     public void AddTower(GameObject tower)
     {
-        currentTowers.Append(tower);
+        currentTowers.Add(tower);
         CheckTowerCount();
-        m_OnTowerBuilt?.Invoke(currentTowers.Length);
+        m_OnTowerBuilt?.Invoke(currentTowers.Count);
     }
 
     public void CheckTowerCount()
     {
-        if (currentTowers.Length == _maxTowers)
+        if (currentTowers.Count == _maxTowers)
         {
             CanPlaceTowers = false;
         }
@@ -45,7 +45,10 @@ public class TowerManager : Singleton<TowerManager>
 
     private void Start()
     {
-        m_OnTowerBuilt?.Invoke(currentTowers.Length);
-        m_OnMaxTowersChanged?.Invoke(_maxTowers);
+        currentTowers = new List<GameObject>();
+        Debug.Log("Tower Count: " + currentTowers.Count.ToString());
+        Debug.Log("Max Tower: " + _maxTowers.ToString());
+
+        CheckTowerCount();
     }
 }

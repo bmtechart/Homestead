@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerBuildBehaviour : MonoBehaviour
 {
     public GameObject selectedBuildingPrefab;
-
+    private TowerManager _towerManager;
     private GameObject buildingPreview;
     // Start is called before the first frame update
     void Start()
@@ -47,6 +47,7 @@ public class PlayerBuildBehaviour : MonoBehaviour
 
     public void Build()
     {
+        if (!TowerManager.GetInstance().CanPlaceTowers) return; //tower manager prevents more towers if cap has been reached
         if (!buildingPreview.GetComponent<BuildingController>().canBePlaced) return;
         GameObject newBuilding = Instantiate(selectedBuildingPrefab);
         newBuilding.transform.SetPositionAndRotation(buildingPreview.transform.position, buildingPreview.transform.rotation);

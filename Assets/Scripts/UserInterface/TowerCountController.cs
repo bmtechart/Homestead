@@ -6,7 +6,7 @@ using UnityEngine;
 public class TowerCountController : MonoBehaviour
 {
     private TowerManager _towerManager;
-    private TextMeshPro _textMesh;
+    private TextMeshProUGUI _textMesh;
 
     private int _towerCount;
     private int _maxTowers;
@@ -14,29 +14,38 @@ public class TowerCountController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _textMesh = GetComponentInChildren<TextMeshPro>();
+        //store reference to tower manager
+        _towerManager = TowerManager.GetInstance();
+        //set initial text
+        _textMesh = GetComponentInChildren<TextMeshProUGUI>();
+        _towerCount = 0;
+        _maxTowers = _towerManager.MaxTowers;
+        UpdateTextMesh();
+
 
         //subscribe to events
-        _towerManager = TowerManager.GetInstance();
+
         _towerManager.m_OnTowerBuilt.AddListener(OnTowerBuilt);
         _towerManager.m_OnMaxTowersChanged.AddListener(OnMaxTowersChanged);
     }
 
-    void OnTowerBuilt(int numTowers)
+    public void OnTowerBuilt(int numTowers)
     {
+        Debug.Log("ui updated!");
         _towerCount = numTowers;
         UpdateTextMesh();
     }
 
-    void OnMaxTowersChanged(int maxTowers)
+    public void OnMaxTowersChanged(int maxTowers)
     {
+        Debug.Log("ui updated!");
         _maxTowers = maxTowers;
         UpdateTextMesh();
     }
 
-    void UpdateTextMesh()
+    public void UpdateTextMesh()
     {
         if (!_textMesh) return;
-        _textMesh.text = _towerCount.ToString() + " / " + _maxTowers.ToString();
+        _textMesh.SetText("{0} / {1}", _towerCount, _maxTowers);
     }
 }

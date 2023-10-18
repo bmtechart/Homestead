@@ -89,7 +89,7 @@ public class TowerBehaviour : MonoBehaviour
 
     public void OnTowerBuild()
     {
-        towerRangeTrigger.enabled = true;
+        //towerRangeTrigger.enabled = true;
     }
 
     IEnumerator Attack()
