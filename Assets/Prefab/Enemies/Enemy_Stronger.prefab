@@ -12,6 +12,10 @@ GameObject:
   - component: {fileID: 1265548267929556051}
   - component: {fileID: 7631395086673934586}
   - component: {fileID: 7696532667063727244}
+  - component: {fileID: 6725434311066890722}
+  - component: {fileID: 7219578755568314083}
+  - component: {fileID: 6012916055964266282}
+  - component: {fileID: 6490769734627178820}
   m_Layer: 0
   m_Name: Enemy_Stronger
   m_TagString: Untagged
@@ -47,15 +51,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb2976fc5c075b945b519b3847c21afc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerTransform: []
-  playerBase: {fileID: 0}
-  movementSpeed: 5
-  attackDistance: 2
-  attackCooldown: 2
-  baseDetectionRange: 10
-  playerDetectionRange: 5
-  enemyDamage: 123
-  targetTowers: 1
 --- !u!54 &7631395086673934586
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -86,6 +81,92 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!195 &6725434311066890722
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5406129121706708775}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &7219578755568314083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5406129121706708775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91e227c9b21c7194684d767fcbffe736, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6012916055964266282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5406129121706708775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6057bc7da455b1d4e9111c3d5a52a3de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  priority: 
+  target: {fileID: 0}
+  m_OnTargetAcquired:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_OnTargetLost:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &6490769734627178820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5406129121706708775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9568b4a40ca14e4fa497e31ddb8b994, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  maxHealth: 100
+  initialHealth: 100
 --- !u!1001 &6036417608411123911
 PrefabInstance:
   m_ObjectHideFlags: 0

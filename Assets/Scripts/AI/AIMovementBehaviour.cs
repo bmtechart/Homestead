@@ -9,6 +9,8 @@ public class AIMovementBehaviour : MonoBehaviour
     private NavMeshAgent agent;
     private NavMeshPath path;
 
+    private GameObject followTarget;
+
     public Transform TargetTransform
     {
         get {  return _targetTransform; }
@@ -32,7 +34,17 @@ public class AIMovementBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(followTarget)
+        {
+            SetDestination(followTarget.transform.position);
+        }
+    }
+
+    public void OnTargetAcquired(GameObject target)
+    {
+        if (!target) return;
+        followTarget = target;
+        SetDestination(target.transform.position);
     }
 
     public void SetDestination(Vector3 destination)
@@ -43,6 +55,7 @@ public class AIMovementBehaviour : MonoBehaviour
 
     public bool CalculateNewPath()
     {
+        if (!_targetTransform) return false;
         agent.CalculatePath(_targetTransform.position, path);
         Debug.Log("New path calculated");
 

@@ -6,10 +6,52 @@ using UnityEngine;
 /// base class that all AI in the game will inherit from
 /// this includes towerTransform and enemies
 /// </summary>
-
+[RequireComponent(typeof(AIMovementBehaviour))]
+[RequireComponent(typeof(AITargetAcquisitionBehaviour))]
 [RequireComponent(typeof(HealthBehaviour))]
 public class AIController : MonoBehaviour, IDamageable
 {
+
+    #region Components
+    private AIMovementBehaviour movementBehaviour;
+    private AITargetAcquisitionBehaviour targetAcquisitionBehaviour;
+    private HealthBehaviour healthBehaviour;
+    #endregion
+
+    #region Runtime Callbacks
+    protected virtual void Start()
+    {
+        //get component references
+        movementBehaviour = GetComponent<AIMovementBehaviour>();
+        targetAcquisitionBehaviour = GetComponent<AITargetAcquisitionBehaviour>();  
+        healthBehaviour = GetComponent<HealthBehaviour>();
+
+        //bind events
+
+
+
+        targetAcquisitionBehaviour.FindTarget();
+    }
+
+    protected virtual void Update()
+    {
+
+    }
+
+    public void OnTargetFound(GameObject target) 
+    {
+        Debug.Log(target.name);
+    }
+
+    #endregion
+
+    #region Damage Interface
+    public void Damage(GameObject source, float damageAmount)
+    {
+        throw new System.NotImplementedException();
+    }
+    #endregion
+    /*
     /// <summary>
     /// -make sure that the AI Controller is the parent class and its children inherit from that (a lot of private variables will need to become protected)
     /// -AI Send out events giving some information like their position, who they are tracking, etc.
@@ -231,4 +273,5 @@ public class AIController : MonoBehaviour, IDamageable
         hb.Damage(damageAmount);
     }
     #endregion
+    */
 }
