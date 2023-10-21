@@ -96,9 +96,15 @@ public class AIController : MonoBehaviour, IDamageable
     protected AIState aiState = AIState.Idle;
     #endregion
 
+
+    public WaveManager waveManager;
+
+
     // Start is called before the first frame update
     protected virtual void Start()
     {
+        waveManager = GetComponentInParent<WaveManager>();
+
         player = GameManager.GetInstance().GetPlayerController();
         playerTransform = player.transform;
         //building = GameManager.GetInstance().GetBuildingController();
