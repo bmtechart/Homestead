@@ -1,10 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 
 public class WaveManager : MonoBehaviour
 {
+    public UnityEvent StartWave;
+
+    public UnityEvent WaveComplete;
+
+    public UnityEvent EndGame;
+
     [SerializeField]
     private float countdown;
 
@@ -19,8 +26,14 @@ public class WaveManager : MonoBehaviour
 
     private bool ReadyCountDown;
 
+
+    public GameObject EndMenu;
+
+
     private void Start()
     {
+        EndMenu.SetActive(false);
+
         ReadyCountDown = true;
 
         for (int i = 0; i < waves.Length; i++)
@@ -34,8 +47,10 @@ public class WaveManager : MonoBehaviour
 
         if (CurrentWave >= waves.Length)
         {
-            //End of the game
-            return;
+            //End of final wave
+
+            EndGame?.Invoke();
+            
         }
 
 
@@ -76,6 +91,18 @@ public class WaveManager : MonoBehaviour
                 yield return new WaitForSeconds(waves[CurrentWave].BetweenEnemiesTime);
             }
         }
+    }
+
+    public void AllWavesFinished()
+    {
+        //End of the game
+
+        EndMenu.SetActive(true);
+
+        Time.timeScale = 0;  
+        
+        Cursor.lockState = CursorLockMode.None;
+        
     }
 
 
