@@ -8,10 +8,14 @@ public class PauseMenu : MonoBehaviour
     public bool gamePaused = false;
     public GameObject pauseMenu;
 
+    public GameObject DeathScreen;
+
 
     private void Start()
     {
         pauseMenu.SetActive(false);
+
+        DeathScreen.SetActive(false);
 
         Cursor.lockState = CursorLockMode.Locked;
         gamePaused = false;
@@ -63,6 +67,22 @@ public class PauseMenu : MonoBehaviour
     public void LeaveGame()
     {
         UnityEditor.EditorApplication.isPlaying = false;
+    }
+
+    public void PlayerDeath ()
+    {
+        Time.timeScale = 0; 
+       
+        Cursor.lockState = CursorLockMode.None; 
+
+
+        DeathScreen.SetActive(true);
+    }
+
+
+    public void Restart ()
+    {
+        SceneManager.LoadScene(0);
     }
 
 }
