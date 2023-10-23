@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class EnemyAnimationEventDispatcher : MonoBehaviour
 {
     public UnityEvent m_OnHitStart;
+    public UnityEvent m_OnHitEnd;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,11 +21,16 @@ public class EnemyAnimationEventDispatcher : MonoBehaviour
 
     public void HitStart()
     {
-        Debug.Log("enemy attack start!");
+        m_OnHitStart?.Invoke();
     }
 
     public void HitEnd()
     {
-        Debug.Log("enemy attack end!");
+        m_OnHitEnd?.Invoke();
+    }
+
+    public void DeathAnimationComplete()
+    {
+        Destroy(gameObject);
     }
 }

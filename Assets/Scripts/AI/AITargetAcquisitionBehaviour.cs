@@ -26,7 +26,11 @@ public class AITargetAcquisitionBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!target) m_OnTargetLost.Invoke();
+        if (!target)
+        {
+            Debug.Log("lost follow target!");
+            m_OnTargetLost.Invoke();
+        }
     }
 
     public void FindTarget()

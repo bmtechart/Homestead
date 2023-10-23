@@ -17,8 +17,12 @@ public class AIMeleeAttack : AIAttackBehaviour
         }
        
         Weapon.Damage = Damage;
-        
+    }
 
+    public override void OnTargetAcquired(GameObject target)
+    {
+        base.OnTargetAcquired(target);
+        Weapon.target = target;
     }
 
     // Update is called once per frame

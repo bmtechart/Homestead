@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 529521726162137956}
   - component: {fileID: 7189566599439990108}
   - component: {fileID: 7487735829206068059}
+  - component: {fileID: 4177672734641560156}
   m_Layer: 0
   m_Name: Enemy_Base_Unit
   m_TagString: Untagged
@@ -197,10 +198,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  followTarget: {fileID: 0}
   targetReaquisitionDistance: 10
   maxDistanceToTarget: 10000
   stoppingDistance: 2
-  drawDebug: 0
+  drawDebug: 1
+  moveRayOrigin: {fileID: 0}
 --- !u!114 &529521726162137956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,9 +260,9 @@ MonoBehaviour:
   m_OnTargetLost:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7189566599439990108}
-        m_TargetAssemblyTypeName: AIAttackBehaviour, Assembly-CSharp
-        m_MethodName: OnTargetLost
+      - m_Target: {fileID: 7487735829206068059}
+        m_TargetAssemblyTypeName: AIAnimationController, Assembly-CSharp
+        m_MethodName: OnAttackEnd
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -294,7 +297,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackTarget: {fileID: 0}
-  attackRange: 5
+  attackRange: 3
   isAttacking: 0
   m_OnEnterAttackRange:
     m_PersistentCalls:
@@ -325,16 +328,49 @@ MonoBehaviour:
         m_CallState: 2
   m_OnLeaveAttackRange:
     m_PersistentCalls:
-      m_Calls: []
-  m_OnTargetLost:
-    m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7189566599439990108}
+        m_TargetAssemblyTypeName: AIAttackBehaviour, Assembly-CSharp
+        m_MethodName: OnTargetLost
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7487735829206068059}
+        m_TargetAssemblyTypeName: AIAnimationController, Assembly-CSharp
+        m_MethodName: OnAttackEnd
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnAttack:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7487735829206068059}
         m_TargetAssemblyTypeName: AIAnimationController, Assembly-CSharp
         m_MethodName: OnAttackStart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 529521726162137956}
+        m_TargetAssemblyTypeName: AITargetAcquisitionBehaviour, Assembly-CSharp
+        m_MethodName: FindTarget
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -361,6 +397,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SkeletalMesh: {fileID: 6000062038266215605}
+--- !u!114 &4177672734641560156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3471621141710744712}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66721e3f74526484a97cea81e7819256, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OnHitStart:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnHitEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &4251564528937716955
 GameObject:
   m_ObjectHideFlags: 0
@@ -545,7 +599,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 8686744877313442231}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1074530768741551244
+--- !u!114 &2535627274213551038
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -563,6 +617,21 @@ MonoBehaviour:
       - m_Target: {fileID: 7189566599439990108}
         m_TargetAssemblyTypeName: AIMeleeAttack, Assembly-CSharp
         m_MethodName: OnStartAttack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  m_OnHitEnd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7189566599439990108}
+        m_TargetAssemblyTypeName: AIMeleeAttack, Assembly-CSharp
+        m_MethodName: OnStopAttack
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

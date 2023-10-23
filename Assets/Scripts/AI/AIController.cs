@@ -46,6 +46,7 @@ public class AIController : MonoBehaviour, IDamageable
 
     public void OnTargetFound(GameObject target) 
     {
+        Debug.Log("new target found: " + target.name);
         aiTarget = target;
     }
 

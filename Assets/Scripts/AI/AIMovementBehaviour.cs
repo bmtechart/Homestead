@@ -18,7 +18,7 @@ public class AIMovementBehaviour : MonoBehaviour
     private NavMeshPath path;
 
 
-    private GameObject followTarget;
+    [SerializeField] private GameObject followTarget;
 
     public Transform TargetTransform
     {
@@ -41,6 +41,7 @@ public class AIMovementBehaviour : MonoBehaviour
     [SerializeField] private float maxDistanceToTarget = 10000.0f;
     [SerializeField] private float stoppingDistance = 5.0f;
     [SerializeField] private bool drawDebug;
+    [SerializeField] GameObject moveRayOrigin;
 
     // Start is called before the first frame update
     void Start()
@@ -62,6 +63,7 @@ public class AIMovementBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!followTarget) return;
         if(Vector3.Distance(followTargetPosition, followTarget.transform.position) > targetReaquisitionDistance)
         {
             SetDestination();
@@ -71,7 +73,12 @@ public class AIMovementBehaviour : MonoBehaviour
         {
             m_OnDestinationReached?.Invoke();
         }
-
+        if (drawDebug)
+        {
+            Vector3 rayOffset = new Vector3(0, agent.height / 2.0f, 0);
+            Vector3 rayDirection = (followTargetPosition - transform.position) * Vector3.Distance(followTargetPosition, transform.position);
+            Debug.DrawRay(transform.position+rayOffset, rayDirection+rayOffset, Color.red, 0.0f, true);
+        }
     }
 
     public void OnTargetAcquired(GameObject target)
@@ -90,9 +97,12 @@ public class AIMovementBehaviour : MonoBehaviour
 
         //instead of moving to root position of target object, 
         //use raycast to move to closest edge of collider of target
-        Collider _collider = followTarget.GetComponent<Collider>();
+        Collider _collider = followTarget.GetComponent<CapsuleCollider>();
 
-        Ray ray = new Ray(transform.position, followTarget.transform.position-transform.position);
+
+        //Vector3 rayOffset = new Vector3(0, agent.height / 2.0f, 0); //draw ray from center of capsule
+
+        Ray ray = new Ray(transform.position, (followTarget.transform.position-transform.position));
         RaycastHit hit;
         float rayLength = maxDistanceToTarget;
 
@@ -101,10 +111,11 @@ public class AIMovementBehaviour : MonoBehaviour
 
         if(_collider.Raycast(ray, out hit, rayLength))
         {
-            if (drawDebug) Debug.DrawRay(transform.position, ((followTarget.transform.position - transform.position) * rayLength)); //debug AI movement vision
             if (agent) agent.destination = hit.point; //update nav mesh agent
+            
             followTargetPosition = followTarget.transform.position; //cache position of follow target. Used in update to determine if we need to reset path for moving targets.
             m_OnStartMoving?.Invoke();
+            Debug.Log("started moving again!");
             return true;
         } 
 

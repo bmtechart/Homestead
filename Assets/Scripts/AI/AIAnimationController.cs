@@ -29,12 +29,13 @@ public class AIAnimationController : AnimationController
 
     public void OnAttackStart()
     {
-        Animator.SetTrigger("StartAttack");
+        //Animator.ResetTrigger("EndAttack");
+        Animator.SetBool("isAttacking", true);
     }
 
     public void OnAttackEnd()
     {
-        Animator.SetTrigger("EndAttack");
+        Animator.SetBool("isAttacking", false);
     }
 
     public void OnDeath()

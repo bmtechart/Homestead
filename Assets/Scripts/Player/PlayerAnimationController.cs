@@ -42,4 +42,12 @@ public class PlayerAnimationController : AnimationController
         if (!Animator) { return; }
         Animator.SetTrigger("stopAttack");
     }
+
+    public void OnDeath()
+    {
+        if(Animator)
+        {
+            Animator.SetTrigger("onDeath");
+        }
+    }
 }

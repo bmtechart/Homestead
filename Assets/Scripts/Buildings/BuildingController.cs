@@ -56,6 +56,7 @@ public class BuildingController : MonoBehaviour, IDamageable
     List<GameObject> overlappingObjects;
     BoxCollider foundationVolume;
     MeshCollider[] meshColliders;
+    CapsuleCollider capsuleCollider;
     
     //original materials will replace preview material once built
     public Dictionary<MeshRenderer, Material[]> originalMaterial;
@@ -72,7 +73,7 @@ public class BuildingController : MonoBehaviour, IDamageable
         overlappingObjects = new List<GameObject>();    
         foundationVolume = GetComponent<BoxCollider>();
         meshColliders = GetComponentsInChildren<MeshCollider>();
-        
+        capsuleCollider = GetComponent<CapsuleCollider>();
         CacheOriginalMaterials();
         //previewMaterial = new Material(previewMaterial);
     }
@@ -211,10 +212,13 @@ public class BuildingController : MonoBehaviour, IDamageable
 
     public void EnableCollision()
     {
+        /*
         foreach (MeshCollider mc in GetComponentsInChildren<MeshCollider>())
         {
             mc.enabled = true;
         }
+        */
+        capsuleCollider.enabled = true;
     }
 
     private void ReassignOriginalMaterials()
@@ -232,8 +236,14 @@ public class BuildingController : MonoBehaviour, IDamageable
 
     public virtual void Damage(GameObject source, float damageAmount)
     {
-        //implement damage functionality here
-        throw new System.NotImplementedException();
+        HealthBehaviour healthBehaviour = GetComponent<HealthBehaviour>();
+        if (!healthBehaviour) return;
+        healthBehaviour.Damage(damageAmount);
+    }
+
+    public void OnDeath()
+    {
+        Destroy(gameObject);
     }
     #endregion
 }
