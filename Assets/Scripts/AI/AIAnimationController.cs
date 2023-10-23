@@ -19,12 +19,12 @@ public class AIAnimationController : AnimationController
 
     public void OnMoveStart()
     {
-        Animator.SetTrigger("StartMove");
+        Animator.SetBool("isMoving", true);
     }
 
     public void OnMoveEnd()
     {
-        Animator.SetTrigger("EndMove");
+        Animator.SetBool("isMoving", false);
     }
 
     public void OnAttackStart()

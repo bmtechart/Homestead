@@ -150,4 +150,4 @@ MonoBehaviour:
   target: {fileID: 0}
   moveSpeed: 6.69
   collisionDistance: 1
-  Damage: 50
+  Damage: 10

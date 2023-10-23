@@ -9,7 +9,7 @@ public class AnimationController : MonoBehaviour
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        if (SkeletalMesh == null)
+        if (!SkeletalMesh)
         {
             Debug.Log("Animation Controller has no skeletal mesh game object assigned!");
             return;
