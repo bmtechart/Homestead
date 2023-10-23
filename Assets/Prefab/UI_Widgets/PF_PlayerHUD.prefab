@@ -1744,7 +1744,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2603084406139011945}
   - component: {fileID: 2603084406139011947}
-  - component: {fileID: 2603084406139011946}
   m_Layer: 5
   m_Name: Slider Player Health
   m_TagString: Untagged
@@ -1825,19 +1824,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &2603084406139011946
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2603084406139011944}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf63dcd087287c042a32152e1762472c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slider: {fileID: 2603084406139011947}
 --- !u!1 &2603084406154059274
 GameObject:
   m_ObjectHideFlags: 0
@@ -2489,6 +2475,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2603084406790052361}
   - component: {fileID: 2603084406790052363}
+  - component: {fileID: 1755194589604748313}
   - component: {fileID: 2603084406790052362}
   m_Layer: 5
   m_Name: Fill
@@ -2525,6 +2512,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2603084406790052360}
   m_CullTransparentMesh: 1
+--- !u!114 &1755194589604748313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2603084406790052360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65ff07c06aa30d048b02aacd66dc58c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HealthBarFill: {fileID: 2603084406790052362}
+  fillChangeSpeed: 1
 --- !u!114 &2603084406790052362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3269,6 +3270,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5796305366117830608}
+  - component: {fileID: 6692067575215023875}
   - component: {fileID: 99677541510465343}
   - component: {fileID: 8150651338684233097}
   m_Layer: 5
@@ -3298,6 +3300,20 @@ RectTransform:
   m_AnchoredPosition: {x: -2.2, y: 15.9}
   m_SizeDelta: {x: 868.61, y: 35}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &6692067575215023875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8316164294359704000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65ff07c06aa30d048b02aacd66dc58c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HealthBarFill: {fileID: 8150651338684233097}
+  fillChangeSpeed: 1
 --- !u!222 &99677541510465343
 CanvasRenderer:
   m_ObjectHideFlags: 0

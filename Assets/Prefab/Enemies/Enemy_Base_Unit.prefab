@@ -200,7 +200,7 @@ MonoBehaviour:
         m_CallState: 2
   followTarget: {fileID: 0}
   targetReaquisitionDistance: 10
-  maxDistanceToTarget: 10000
+  maxDistanceToTarget: 100000
   stoppingDistance: 2
   drawDebug: 1
   moveRayOrigin: {fileID: 0}

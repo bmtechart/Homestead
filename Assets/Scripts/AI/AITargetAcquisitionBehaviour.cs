@@ -72,6 +72,8 @@ public class AITargetAcquisitionBehaviour : MonoBehaviour
         GameObject closestObject = null;
         float closestDistance = Mathf.Infinity;
 
+        if (objects.Count == 0) return null;
+
         foreach(GameObject obj in objects)
         {
             float distance = Vector3.Distance(transform.position, obj.transform.position);

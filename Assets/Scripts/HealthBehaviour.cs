@@ -10,7 +10,7 @@ public class HealthBehaviour : MonoBehaviour
     public UnityEvent OnDeath;
 
     [Tooltip("Callback parameters, current health")]
-    public UnityEvent<float, float, float> OnHealthChanged;
+    public UnityEvent<float> OnHealthChanged;
 
     [Tooltip("Absolute value represnting total hit point pool.")]
     [SerializeField] private float maxHealth = 100.0f;
@@ -39,6 +39,10 @@ public class HealthBehaviour : MonoBehaviour
             {
                 Debug.Log("death event invoked");
                 OnDeath?.Invoke();
+            } 
+            else
+            {
+                OnHealthChanged?.Invoke(_healthPercentage);
             }
         }
     }

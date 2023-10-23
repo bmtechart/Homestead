@@ -9,7 +9,7 @@ using UnityEngine.AI;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(NavMeshObstacle))]
-[RequireComponent(typeof(BoxCollider))] //box collider used as trigger to see if the building can be placed
+[RequireComponent(typeof(BoxCollider))]
 public class BuildingController : MonoBehaviour, IDamageable
 {
     public UnityEvent m_OnBuildingConstructed;
@@ -70,12 +70,17 @@ public class BuildingController : MonoBehaviour, IDamageable
     // Start is called before the first frame update
     public virtual void Start()
     {
-        overlappingObjects = new List<GameObject>();    
+        CacheComponents();
+        CacheOriginalMaterials();
+        //previewMaterial = new Material(previewMaterial);
+    }
+
+    public void CacheComponents()
+    {
+        overlappingObjects = new List<GameObject>();
         foundationVolume = GetComponent<BoxCollider>();
         meshColliders = GetComponentsInChildren<MeshCollider>();
         capsuleCollider = GetComponent<CapsuleCollider>();
-        CacheOriginalMaterials();
-        //previewMaterial = new Material(previewMaterial);
     }
 
     public virtual void Update()
@@ -125,7 +130,6 @@ public class BuildingController : MonoBehaviour, IDamageable
 
         if(overlappingObjects.Count > 0)
         {
-            
             canBePlaced = false;
             if (!TowerManager.GetInstance().CanPlaceTowers) canBePlaced = false;
             SetPreviewMaterialColor(canBePlaced);
@@ -201,7 +205,7 @@ public class BuildingController : MonoBehaviour, IDamageable
             //play negative sound queue
             return;
         }
-        EnableCollision();
+        //EnableCollision();
         PreviewMode = false;
         
         m_OnBuildingConstructed?.Invoke();
@@ -212,12 +216,8 @@ public class BuildingController : MonoBehaviour, IDamageable
 
     public void EnableCollision()
     {
-        /*
-        foreach (MeshCollider mc in GetComponentsInChildren<MeshCollider>())
-        {
-            mc.enabled = true;
-        }
-        */
+
+        foundationVolume.enabled = false;
         capsuleCollider.enabled = true;
     }
 

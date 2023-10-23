@@ -7,7 +7,7 @@ public class AIAttackBehaviour : MonoBehaviour
 {
     [SerializeField] private GameObject attackTarget;
     [SerializeField] private float attackRange;
-    [SerializeField] private bool isAttacking = false;
+    public bool isAttacking = false;
 
     public UnityEvent m_OnEnterAttackRange;
     public UnityEvent m_OnLeaveAttackRange;
@@ -30,21 +30,38 @@ public class AIAttackBehaviour : MonoBehaviour
         if (!attackTarget) return;
 
         //if we are in range of our target
-        if(Vector3.Distance(transform.position, attackTarget.transform.position)<=attackRange)
+        if(CheckRange())
         {
             if (isAttacking) return;
             isAttacking = true;
+            Debug.Log("started attacking");
             m_OnEnterAttackRange.Invoke();
         }
 
-
-        if(Vector3.Distance(transform.position, attackTarget.transform.position) >= attackRange)
+        if(!CheckRange())
         {
             m_OnLeaveAttackRange.Invoke();
             isAttacking = false;
-        }
+        }   
+    }
 
-        
+    protected bool CheckRange()
+    {
+        if (!attackTarget) return false;
+        Ray ray = new Ray(transform.position, (attackTarget.transform.position - transform.position));
+        RaycastHit hit;
+        float rayLength = Mathf.Infinity;
+        Collider _collider = attackTarget.GetComponent<CapsuleCollider>();
+        if (!_collider) _collider = attackTarget.GetComponent<BoxCollider>();
+
+        if (_collider.Raycast(ray, out hit, rayLength))
+        {
+            if(hit.distance <= attackRange)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public virtual void OnStartAttack()
@@ -58,6 +75,10 @@ public class AIAttackBehaviour : MonoBehaviour
     }
 
     //expression bodied members are cool!
-    public virtual void OnTargetAcquired(GameObject target) => attackTarget = target;
+    public virtual void OnTargetAcquired(GameObject target)
+    {
+        attackTarget = target;
+    }
     public void OnTargetLost() => isAttacking = false;
+
 }

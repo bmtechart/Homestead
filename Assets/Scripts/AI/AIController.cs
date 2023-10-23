@@ -39,6 +39,12 @@ public class AIController : MonoBehaviour, IDamageable
         targetAcquisitionBehaviour.FindTarget();
     }
 
+    public void Init()
+    {
+        //start behaviour by finding target
+        targetAcquisitionBehaviour.FindTarget();
+    }
+
     protected virtual void Update()
     {
 

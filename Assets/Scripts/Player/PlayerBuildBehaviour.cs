@@ -51,6 +51,7 @@ public class PlayerBuildBehaviour : MonoBehaviour
         if (!buildingPreview.GetComponent<BuildingController>().canBePlaced) return;
         GameObject newBuilding = Instantiate(selectedBuildingPrefab);
         newBuilding.transform.SetPositionAndRotation(buildingPreview.transform.position, buildingPreview.transform.rotation);
+        newBuilding.GetComponent<BuildingController>().CacheComponents();
         newBuilding.GetComponent<BuildingController>().Build();
         //newBuilding.GetComponent<BuildingController>().PreviewMode=false;   
     }

@@ -81,3 +81,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b0f82251f44be8448515022bd90569a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CanPlaceTowers: 0
+  m_OnTowerBuilt:
+    m_PersistentCalls:
+      m_Calls: []
+  m_OnMaxTowersChanged:
+    m_PersistentCalls:
+      m_Calls: []

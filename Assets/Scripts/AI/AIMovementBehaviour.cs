@@ -41,7 +41,6 @@ public class AIMovementBehaviour : MonoBehaviour
     [SerializeField] private float maxDistanceToTarget = 10000.0f;
     [SerializeField] private float stoppingDistance = 5.0f;
     [SerializeField] private bool drawDebug;
-    [SerializeField] GameObject moveRayOrigin;
 
     // Start is called before the first frame update
     void Start()
