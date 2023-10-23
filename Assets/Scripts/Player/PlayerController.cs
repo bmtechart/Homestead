@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour, IDamageable
 
         //bind death to game over
         healthBehaviour = GetComponent<HealthBehaviour>();
-        healthBehaviour.OnDeath.AddListener(GameManager.GetInstance().GameOver);
+        healthBehaviour.OnDeath.AddListener(delegate { GameManager.GetInstance().GameOver(false); });
     }
 
     #endregion

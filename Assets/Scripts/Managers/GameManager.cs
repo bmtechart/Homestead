@@ -8,7 +8,7 @@ public class GameManager : Singleton<GameManager>
 
     #region Events
 
-    public UnityEvent m_OnGameOver;
+    public UnityEvent<bool> m_OnGameOver; //true for victory, false for defeat
     public UnityEvent m_OnGameStart;
 
     #endregion
@@ -41,9 +41,9 @@ public class GameManager : Singleton<GameManager>
         return playerController;
     }
 
-    public void GameOver()
+    public void GameOver(bool playerVictory)
     {
-        m_OnGameOver?.Invoke();
+        m_OnGameOver?.Invoke(playerVictory);
     }
 
     // Update is called once per frame

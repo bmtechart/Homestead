@@ -2,22 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAnimationController : MonoBehaviour
+public class PlayerAnimationController : AnimationController
 {
-    public GameObject skeletalMesh;
 
-
-    private Animator _animator;
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-        if (skeletalMesh == null) 
-        {
-            Debug.Log("Animation Controller has no skeletal mesh game object assigned!");
-            return; 
-        }
-        
-        _animator = skeletalMesh.GetComponent<Animator>();
+        base.Start();
     }
 
     // Update is called once per frame
@@ -28,27 +19,27 @@ public class PlayerAnimationController : MonoBehaviour
 
     public void StartMoving()
     {
-        if (!_animator) { return; }
-        _animator.SetTrigger("startMoving");
+        if (!Animator) { return; }
+        Animator.SetTrigger("startMoving");
     }
 
     public void StopMoving()
     {
-        if (!_animator) { return; }
-        _animator.ResetTrigger("startMoving");
-        _animator.SetTrigger("stopMoving");
+        if (!Animator) { return; }
+        Animator.ResetTrigger("startMoving");
+        Animator.SetTrigger("stopMoving");
     }
 
     public void StartAttack()
     {
-        if(!_animator) { return; }
-        _animator.SetTrigger("startAttack");
+        if(!Animator) { return; }
+        Animator.SetTrigger("startAttack");
         Debug.Log("AttackStart");
     }
 
     public void StopAttack()
     {
-        if (!_animator) { return; }
-        _animator.SetTrigger("stopAttack");
+        if (!Animator) { return; }
+        Animator.SetTrigger("stopAttack");
     }
 }

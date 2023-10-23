@@ -13,7 +13,7 @@ public class HomesteadController : BuildingController
         healthBehaviour = GetComponent<HealthBehaviour>();
         if(healthBehaviour)
         {
-            healthBehaviour.OnDeath.AddListener(GameManager.GetInstance().GameOver);
+            healthBehaviour.OnDeath.AddListener(delegate { GameManager.GetInstance().GameOver(false); });
         }
     }
 

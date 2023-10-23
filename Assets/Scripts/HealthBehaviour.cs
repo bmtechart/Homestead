@@ -25,8 +25,8 @@ public class HealthBehaviour : MonoBehaviour
         get { return _healthPercentage; }
     }
 
-    //Health
-    private float _currentHealth;
+    //serialize field so we can debug in editor
+    [SerializeField] private float _currentHealth;
     public float CurrentHealth
     {
         get { return _currentHealth; }
@@ -35,8 +35,9 @@ public class HealthBehaviour : MonoBehaviour
             _currentHealth = value;
             _healthPercentage = _currentHealth / maxHealth;
 
-            if (_currentHealth < 0.0f)
+            if (_currentHealth <= 0.0f)
             {
+                Debug.Log("death event invoked");
                 OnDeath?.Invoke();
             }
         }
@@ -44,6 +45,7 @@ public class HealthBehaviour : MonoBehaviour
 
     public void Damage(float amount)
     {
+        if (CurrentHealth <= 0.0f) return; //don't damage if unit is already dead
         CurrentHealth -= amount;
     }
 

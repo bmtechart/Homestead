@@ -9,13 +9,18 @@ using UnityEngine;
 [RequireComponent(typeof(AIMovementBehaviour))]
 [RequireComponent(typeof(AITargetAcquisitionBehaviour))]
 [RequireComponent(typeof(HealthBehaviour))]
+[RequireComponent(typeof(AIAnimationController))]
 public class AIController : MonoBehaviour, IDamageable
 {
+    #region Variables
+    [SerializeField] private GameObject aiTarget; 
+    #endregion
 
     #region Components
     private AIMovementBehaviour movementBehaviour;
     private AITargetAcquisitionBehaviour targetAcquisitionBehaviour;
     private HealthBehaviour healthBehaviour;
+    private AIAnimationController animationController;
     #endregion
 
     #region Runtime Callbacks
@@ -25,11 +30,12 @@ public class AIController : MonoBehaviour, IDamageable
         movementBehaviour = GetComponent<AIMovementBehaviour>();
         targetAcquisitionBehaviour = GetComponent<AITargetAcquisitionBehaviour>();  
         healthBehaviour = GetComponent<HealthBehaviour>();
+        animationController = GetComponent<AIAnimationController>();
 
         //bind events
 
 
-
+        //start behaviour by finding target
         targetAcquisitionBehaviour.FindTarget();
     }
 
@@ -40,17 +46,27 @@ public class AIController : MonoBehaviour, IDamageable
 
     public void OnTargetFound(GameObject target) 
     {
-        Debug.Log(target.name);
+        aiTarget = target;
     }
 
     #endregion
 
-    #region Damage Interface
+    #region Damage & Death
     public void Damage(GameObject source, float damageAmount)
     {
-        throw new System.NotImplementedException();
+        if (!healthBehaviour) return;
+        healthBehaviour.Damage(damageAmount);
+    }
+
+    public void OnDeath()
+    {
+        //disable all behaviours
+        movementBehaviour.enabled = false;
+        targetAcquisitionBehaviour.enabled = false;
+
     }
     #endregion
+
     /*
     /// <summary>
     /// -make sure that the AI Controller is the parent class and its children inherit from that (a lot of private variables will need to become protected)

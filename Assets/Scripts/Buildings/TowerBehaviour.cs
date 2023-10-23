@@ -101,9 +101,10 @@ public class TowerBehaviour : MonoBehaviour
             Debug.Log("shoot!");
             GameObject projectileInstance = Instantiate(projectile);
             projectileInstance.transform.SetPositionAndRotation(projectileSpawn.position, projectileSpawn.rotation);
-            if (!projectileInstance) yield return new WaitForSeconds(attackDelay); ;
+            if (!projectileInstance) yield return new WaitForSeconds(attackDelay);
+            
             ProjectileController projectileController = projectile.GetComponent<ProjectileController>();
-            if (!projectileController) yield return new WaitForSeconds(attackDelay); ;
+            if (!projectileController) yield return new WaitForSeconds(attackDelay);
 
 
             projectileController.target = target.gameObject;
