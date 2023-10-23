@@ -98,6 +98,7 @@ public class AIMovementBehaviour : MonoBehaviour
         //instead of moving to root position of target object, 
         //use raycast to move to closest edge of collider of target
         Collider _collider = followTarget.GetComponent<CapsuleCollider>();
+        if (!_collider) _collider = followTarget.GetComponent<BoxCollider>();
 
 
         //Vector3 rayOffset = new Vector3(0, agent.height / 2.0f, 0); //draw ray from center of capsule

@@ -39,7 +39,7 @@ public class DayNightCycleBehaviour : MonoBehaviour
             Debug.Log("It's night");
             return;
         }
-
+        /*
         if(!isDaytime && timeOfDay >= nightDuration) //style note: "else" isn't necessary here, just use two if statements
         {
             StartDay();
@@ -66,6 +66,7 @@ public class DayNightCycleBehaviour : MonoBehaviour
         {
             OnDayUpdateFrame?.Invoke(timeProgress);
         }
+        */
     }
 
     //start DayNightCycle and SwitchToDay are the same function
@@ -77,6 +78,7 @@ public class DayNightCycleBehaviour : MonoBehaviour
         timeOfDay = 0.0f;
         isDaytime = true;
         OnDayStart?.Invoke();
+        Debug.Log("Day Started");
     }
 
     private void StartNight()

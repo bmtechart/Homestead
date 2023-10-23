@@ -19,27 +19,32 @@ public class AIAnimationController : AnimationController
 
     public void OnMoveStart()
     {
+        if (!Animator) return;
         Animator.SetBool("isMoving", true);
     }
 
     public void OnMoveEnd()
     {
+        if (!Animator) return;
         Animator.SetBool("isMoving", false);
     }
 
     public void OnAttackStart()
     {
+        if (!Animator) return;
         //Animator.ResetTrigger("EndAttack");
         Animator.SetBool("isAttacking", true);
     }
 
     public void OnAttackEnd()
     {
+        if (!Animator) return;
         Animator.SetBool("isAttacking", false);
     }
 
     public void OnDeath()
     {
+        if (!Animator) return;
         Animator.SetTrigger("Death");
     }
 
@@ -48,6 +53,7 @@ public class AIAnimationController : AnimationController
         //if the player wins, do not trigger animation
         //if player loses, play cheering animation
         if (playerVictory) return;
+        if (!Animator) return;
         Animator.SetTrigger("Victory");
     }
 }

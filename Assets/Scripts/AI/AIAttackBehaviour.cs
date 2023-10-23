@@ -34,7 +34,6 @@ public class AIAttackBehaviour : MonoBehaviour
         {
             if (isAttacking) return;
             isAttacking = true;
-            Debug.Log("Started attacking: "+ attackTarget.name);
             m_OnEnterAttackRange.Invoke();
         }
 
