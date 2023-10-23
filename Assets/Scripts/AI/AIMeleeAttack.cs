@@ -4,18 +4,21 @@ using UnityEngine;
 
 public class AIMeleeAttack : AIAttackBehaviour
 {
-    [SerializeField] private Collider WeaponCollider;
+    [SerializeField] private WeaponController Weapon;
+    [SerializeField] private float Damage;
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
-        if (!WeaponCollider)
+        if (!Weapon)
         {
             Debug.Log("No weapon Collider assigned to melee attack");
             return;
         }
        
-        WeaponCollider.enabled = false;
+        Weapon.Damage = Damage;
+        
+
     }
 
     // Update is called once per frame
@@ -27,8 +30,14 @@ public class AIMeleeAttack : AIAttackBehaviour
     public override void OnStartAttack()
     {
         base.OnStartAttack();
-        WeaponCollider.enabled = true;
+        Weapon.EnableWeapon();
     }
 
-    
+    public override void OnStopAttack()
+    {
+        base.OnStopAttack();
+        Weapon.DisableWeapon();
+    }
+
+
 }

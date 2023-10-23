@@ -13,7 +13,7 @@ public class WeaponController : MonoBehaviour
     void Start()
     {
         _collider = GetComponent<Collider>();
-        if(!collider)
+        if(!GetComponent<Collider>())
         {
             return;
         }
